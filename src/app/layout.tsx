@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import React from "react";
+import DefaultPage from "@/components/DefaultPage";
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Coderstore Almeida',
-  description: 'Criado para o curso coderhouse',
+  description: 'Criado para o curso da Coderhouse',
 }
 
 export default function RootLayout({
@@ -17,7 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <DefaultPage>
+          {children}
+        </DefaultPage>
+      </body>
     </html>
   )
 }
