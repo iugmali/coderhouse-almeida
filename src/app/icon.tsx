@@ -20,7 +20,7 @@ export default function Icon() {
           fontFamily: "monospace",
           fontSize: 24,
           borderRadius: '50%',
-          background: 'black',
+          background: `#111111`,
           width: '100%',
           height: '100%',
           display: 'flex',
