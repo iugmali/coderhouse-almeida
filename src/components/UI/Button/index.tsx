@@ -3,13 +3,14 @@
 import React from "react";
 
 type Props = {
-  children: React.ReactNode,
-  handleClick: () => void,
+  children?: React.ReactNode;
+  disabled?: boolean;
+  handleClick: () => void;
 };
 
-const Button = ({children, handleClick}: Props) => {
+const Button = ({children, handleClick, disabled = false}: Props) => {
   return (
-    <button className={`bg-blue-900 px-4 py-2 text-white hover:opacity-90`} onClick={handleClick}>
+    <button className={`bg-blue-900 disabled:bg-gray-500 px-4 py-2 text-white hover:opacity-90 disabled:hover:opacity-100`} onClick={handleClick} disabled={disabled}>
       {children}
     </button>
   );
