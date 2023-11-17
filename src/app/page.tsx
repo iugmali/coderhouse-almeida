@@ -1,6 +1,6 @@
 import ItemListContainer from "@/components/ItemListContainer";
 
-const Home = () => {
+const HomePage = () => {
   return (
       <main className="flex h-full flex-col px-14 py-2">
         <ItemListContainer greeting={`Hello Coderstore`} />
@@ -8,4 +8,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
