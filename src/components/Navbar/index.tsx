@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {useState} from "react";
-import CartWidget from "../UI/CartWidget";
+import CartWidget from "@/components/ui/CartWidget";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +10,7 @@ const Navbar = () => {
     setMenuOpen((prevState) => !prevState);
   }
   return (
-    <nav className="bg-gradient-to-b from-gray-800 to-gray-900 drop-shadow-lg">
+    <nav className="sticky top-0 z-50 bg-gradient-to-b from-gray-800 to-gray-900 drop-shadow-lg">
       <div className="flex px-8 py-6 justify-between items-start mx-auto max-w-3xl">
         <Link className={'font-extrabold font-mono'} href={'/'}>Coderstore</Link>
         <CartWidget quantity={1}/>

@@ -1,7 +1,7 @@
 'use client';
 
 import {useState} from "react";
-import Button from "@/components/UI/Button";
+import Button from "@/components/ui/Button";
 
 type Props = {
   stock: number;
@@ -38,16 +38,19 @@ const ItemCount = ({stock, initial, onAdd}: Props) => {
   }
 
   return (
-    <article className={`flex flex-col mt-4`}>
-      <div>
-        <h2>Item para compra. Disponível em estoque: {stock}</h2>
-      </div>
-      <div className={`flex justify-between items-center mt-2 mb-2 border-gray-200 border-2`}>
+    <article className={`flex flex-col w-full`}>
+      <div className={`flex justify-between items-center border-gray-200 border-t-2 border-b-2`}>
         <button className={`flex-1 bg-gray-700 active:opacity-70`} onClick={() => changeQuantityHandler(Operation.Subtract)}>-</button>
         <div className={`flex-1 text-center`}>{quantity}</div>
         <button className={`flex-1 bg-gray-700 active:opacity-70`} onClick={() => changeQuantityHandler(Operation.Add)}>+</button>
       </div>
       <Button handleClick={addHandler} disabled={stock == 0}>Adicionar</Button>
+      <div className={`text-center`}>
+        {
+          stock > 0 ? <h2 className={`text-gray-400`}>Em estoque: {stock}</h2> : <h2 className={`text-gray-400`}>Fora de estoque</h2>
+        }
+
+      </div>
     </article>
   )
 }
