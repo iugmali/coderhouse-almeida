@@ -158,7 +158,12 @@ export const getProducts = (): Promise<Product[]> => {
 export const getProduct = (productId: string): Promise<Product> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(products.find(p => p.id == productId)!);
+      const product = products.find(p => p.id == productId);
+      if (product) {
+        resolve(product)
+      } else {
+        reject('Não existe')
+      }
     }, 2000)
   });
 }
