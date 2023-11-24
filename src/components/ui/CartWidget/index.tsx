@@ -5,9 +5,6 @@ type Props = {
 const CartWidget = ({quantity}: Props) => {
   return (
       <button className="relative hover:opacity-50">
-        {/*
-        Tentei usar a lógica {quantity && <div></div>}, mas no caso da quantity ser zero ele sempre outputava só o zero, sem o div. Por isso acabei usando o ternário.
-        */}
         {(quantity) ?
           <div className="t-0 absolute left-6">
             <p className="flex h-2 w-2 items-center justify-center rounded-full bg-gray-100 p-3 text-xs text-gray-950">{quantity}</p>

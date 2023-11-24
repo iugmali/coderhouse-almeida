@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import React from "react";
-import DefaultPage from "@/components/DefaultPage";
+import React, {Suspense} from "react";
+import Navbar from "@/components/Navbar";
+import Loading from "@/app/loading";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,10 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`min-h-screen ${inter.className}`}>
-        <DefaultPage>
-          {children}
-        </DefaultPage>
+      <body className={`min-h-screen bg-gray-50 ${inter.className}`}>
+        <Navbar />
+        {children}
       </body>
     </html>
   )

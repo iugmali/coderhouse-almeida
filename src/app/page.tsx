@@ -1,10 +1,9 @@
-import ItemListContainer from "../components/items/ItemListContainer";
+import ItemListContainer from "../components/screens/ItemListContainer";
 
-const HomePage = () => {
+const HomePage = async () => {
+
   return (
-      <main className="flex h-full">
-        <ItemListContainer greeting={`Hello Coderstore`} />
-      </main>
+        <ItemListContainer greeting={`Olá, visitante!`} />
   );
 };
 

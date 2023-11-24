@@ -39,7 +39,7 @@ const ItemCount = ({stock, initial, onAdd}: Props) => {
 
   return (
     <article className={`flex flex-col w-full`}>
-      <div className={`flex justify-between items-center border-gray-200 border-t-2 border-b-2`}>
+      <div className={`flex justify-between items-center border-gray-600 border-t-2 border-b-2`}>
         <button className={`flex-1 bg-gray-700 active:opacity-70`} onClick={() => changeQuantityHandler(Operation.Subtract)}>-</button>
         <div className={`flex-1 text-center`}>{quantity}</div>
         <button className={`flex-1 bg-gray-700 active:opacity-70`} onClick={() => changeQuantityHandler(Operation.Add)}>+</button>
