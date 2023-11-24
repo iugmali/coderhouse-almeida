@@ -1,5 +1,3 @@
-'use client';
-
 import {Product} from "@/types/product";
 import Item from "@/components/items/Item";
 
@@ -9,9 +7,9 @@ type Props = {
 
 const ItemList = ({items} : Props) => {
   return (
-    <div className={`flex gap-8 flex-wrap justify-center mt-4`}>
+    <section className={`grid max-md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4 mx-auto`}>
       {items.map((item) => (<Item key={item.id} {...item} />))}
-    </div>
+    </section>
   );
 }
 
