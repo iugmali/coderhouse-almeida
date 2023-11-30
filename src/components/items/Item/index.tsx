@@ -12,11 +12,11 @@ const imageLoader = ({ src, width, quality }: ImageLoaderProps) => {
 
 const Item = ({id, title, description, pictureUrl, stock, price}: Product) => {
   return (
-    <Link href={`/product/${id}`}>
-      <article className={`rounded-lg justify-self-center w-72 border-gray-600 bg-gray-200 text-gray-950 shadow-md hover:shadow-xl`}>
+    <Link href={`/item/${id}`}>
+      <article className={`animate-entering rounded-lg justify-self-center w-72 border border-gray-200 bg-gradient-to-b from-gray-800 to-gray-900 text-gray-50 shadow-md hover:shadow-xl hover:border-gray-600`}>
         <h1 className={`text-center text-xl py-2`}>{title}</h1>
         <Image className={`h-64`} loader={imageLoader} src={pictureUrl} alt={title} width={320} height={320} />
-        <p className={`text-center hover:bg-gray-300 transition-all`}>Ver detalhes</p>
+        <p className={`text-center hover:bg-gray-800 transition-all`}>Ver detalhes</p>
         <h2 className={`text-center p-4 text-2xl`}>R$ {price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h2>
       </article>
     </Link>

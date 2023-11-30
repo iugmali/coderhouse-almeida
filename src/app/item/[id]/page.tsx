@@ -4,13 +4,13 @@ import {getProduct} from "@/data/products";
 
 type Props = {
   params: {
-    productId: string;
+    id: string;
   }
 };
 
-const CategoryPage = async ({params: {productId}} : Props) => {
+const CategoryPage = async ({params: {id}} : Props) => {
   return (
-    <ItemDetailContainer id={productId} />
+    <ItemDetailContainer id={id} />
   );
 };
 

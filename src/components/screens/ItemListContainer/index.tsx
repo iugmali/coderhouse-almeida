@@ -3,13 +3,14 @@ import {Product} from "@/types/product";
 import ItemList from "@/components/items/ItemList";
 
 type Props = {
-  greeting: string
+  greeting: string;
+  category?: string;
 }
 
-const ItemListContainer = async ({greeting}: Props) => {
+const ItemListContainer = async ({greeting, category = 'all'}: Props) => {
   let products: Product[] = [];
   try {
-    products = await getProducts();
+    products = await getProducts(category);
   } catch (e) {
     throw e;
   } finally {

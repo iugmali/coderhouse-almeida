@@ -1,3 +1,5 @@
+import ItemListContainer from "@/components/screens/ItemListContainer";
+
 type Props = {
   params: {
     category: string;
@@ -16,9 +18,7 @@ export const generateStaticParams = () => {
 
 const CategoryPage = ({params: {category}} : Props) => {
   return (
-    <main className="flex h-full flex-row items-center justify-center p-14">
-      <p>{category}</p>
-    </main>
+    <ItemListContainer greeting={`Olá, visitante! Listando ${category}.`} category={category} />
   );
 };
 
