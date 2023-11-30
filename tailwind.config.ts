@@ -12,6 +12,21 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      keyframes: {
+        entering: {
+          from: {
+            transform: 'translateY(1rem)',
+            opacity: '0'
+          },
+          to: {
+            transform: 'translateY(0)',
+            opacity: '1'
+          }
+        }
+      },
+      animation: {
+        entering: 'entering 1s ease-out forwards'
+      }
     },
   },
   plugins: [

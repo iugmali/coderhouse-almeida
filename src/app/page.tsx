@@ -3,7 +3,7 @@ import ItemListContainer from "../components/screens/ItemListContainer";
 const HomePage = async () => {
 
   return (
-        <ItemListContainer greeting={`Olá, visitante!`} />
+        <ItemListContainer greeting={`Olá, visitante! Listando todos os produtos.`} />
   );
 };
 

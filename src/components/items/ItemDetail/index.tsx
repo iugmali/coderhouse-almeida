@@ -19,7 +19,7 @@ const ItemDetail = ({title, description, pictureUrl, stock, price}:Product) => {
   }
 
   return (
-    <section className={`flex flex-col`}>
+    <section className={`animate-entering flex flex-col`}>
       <h1 className={`text-center text-2xl`}>{title}</h1>
       <div className={`mt-4 self-center rounded-lg shadow-lg`}>
         <Image className={`h-64 rounded-lg`} loader={imageLoader} src={pictureUrl} alt={title} width={320} height={320} />
