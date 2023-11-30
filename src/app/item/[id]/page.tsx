@@ -8,10 +8,10 @@ type Props = {
   }
 };
 
-const CategoryPage = async ({params: {id}} : Props) => {
+const ItemPage = async ({params: {id}} : Props) => {
   return (
     <ItemDetailContainer id={id} />
   );
 };
 
-export default CategoryPage;
+export default ItemPage;
