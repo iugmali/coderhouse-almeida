@@ -33,24 +33,18 @@ const ItemCount = ({stock, initial, onAdd}: Props) => {
   }
 
   const addHandler = () => {
-    setQuantity(1);
     onAdd(quantity);
+    setQuantity(1);
   }
 
   return (
-    <article className={`flex flex-col w-full`}>
-      <div className={`flex justify-between items-center border-gray-600 border-t-2 border-b-2`}>
-        <button className={`flex-1 bg-gray-700 active:opacity-70`} onClick={() => changeQuantityHandler(Operation.Subtract)}>-</button>
+    <article className={`mt-4 flex flex-col max-w-md justify-center items-center mx-auto`}>
+      <div className={`rounded-lg flex w-full justify-between items-center border-gray-600 border-2`}>
+        <button className={`flex-1 bg-gray-600 bg-opacity-20 active:bg-opacity-70`} onClick={() => changeQuantityHandler(Operation.Subtract)}>-</button>
         <div className={`flex-1 text-center`}>{quantity}</div>
-        <button className={`flex-1 bg-gray-700 active:opacity-70`} onClick={() => changeQuantityHandler(Operation.Add)}>+</button>
+        <button className={`flex-1 bg-gray-600 bg-opacity-20 active:bg-opacity-70`} onClick={() => changeQuantityHandler(Operation.Add)}>+</button>
       </div>
-      <Button handleClick={addHandler} disabled={stock == 0}>Adicionar</Button>
-      <div className={`text-center`}>
-        {
-          stock > 0 ? <h2 className={`text-gray-400`}>Em estoque: {stock}</h2> : <h2 className={`text-gray-400`}>Fora de estoque</h2>
-        }
-
-      </div>
+      <Button className={`mt-4`} handleClick={addHandler} disabled={stock == 0}>Adicionar ao carrinho</Button>
     </article>
   )
 }

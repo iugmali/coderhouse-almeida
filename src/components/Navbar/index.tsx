@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-gradient-to-b from-gray-800 to-gray-900 drop-shadow-lg text-gray-50">
       <div className="flex px-8 py-6 justify-between items-start mx-auto max-w-3xl">
         <Link className={'font-extrabold font-mono'} href={'/'}>Coderstore</Link>
-        <CartWidget quantity={1}/>
+        <CartWidget quantity={3}/>
         <div className={`flex flex-col items-end justify-normal`}>
           <button className={`${menuOpen ? 'mb-16 mt-3' : ''} md:hidden`} onClick={handleMenuOpen}>
             <div className={`transition-all ${menuOpen ? 'space-y-0' : 'space-y-2'}`}>
