@@ -1,6 +1,4 @@
-import {Product} from "@/types/product";
 import ItemDetailContainer from "@/components/screens/ItemDetailContainer";
-import {getProduct} from "@/data/products";
 
 type Props = {
   params: {

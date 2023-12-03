@@ -3,21 +3,33 @@
 import {Product} from "@/types/product";
 import Image, {ImageLoaderProps} from "next/image";
 import Button from "@/components/ui/Button";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import ItemCount from "@/components/items/ItemCount";
 import {useRouter} from "next/navigation";
+import CartContext from "@/context/cartContext";
 
 const imageLoader = ({ src, width, quality }: ImageLoaderProps) => {
   return `${src}?w=${width}&q=${quality || 75}`
 }
 
-const ItemDetail = ({title, description, pictureUrl, stock, price}:Product) => {
-  const [currentStock, setCurrentStock] = useState(stock);
+const ItemDetail = ({id, category, title, description, pictureUrl, stock, price}:Product) => {
+  const {onAddItem, cartItems, isInCart} = useContext(CartContext);
+  let updatedStock = stock;
+  if (isInCart(id)) {
+    const index = cartItems.findIndex(item => item.id === id);
+    updatedStock = updatedStock - cartItems[(cartItems.findIndex(item => item.id === id))].quantity;
+  }
+  const [currentStock, setCurrentStock] = useState(updatedStock);
   const router = useRouter();
 
   const onAdd = (quantity: number = 1) => {
     if (quantity > currentStock) return;
+    onAddItem({title, description, pictureUrl, stock, price, id, category, quantity});
     setCurrentStock((prevState) => prevState - quantity);
+  }
+
+  const goBack = () => {
+    router.back();
   }
 
   const goToCart = () => {
@@ -34,7 +46,10 @@ const ItemDetail = ({title, description, pictureUrl, stock, price}:Product) => {
       <h2 className={`text-center p-4 pb-0 text-2xl`}>R$ {price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h2>
       <p className={`text-center text-gray-400`}>{(currentStock > 0) ? (currentStock == 1) ? `(1 disponível)` : `(${currentStock} disponíveis)` : `(fora de estoque)`}</p>
       <ItemCount stock={currentStock} initial={1} onAdd={onAdd} />
-      <Button className={`mt-4 bg-green-800 mx-auto`} handleClick={goToCart}>Finalizar compra</Button>
+      <div className={`flex justify-center items-center gap-4`}>
+        <Button className={`max-w-md mt-4 bg-gray-600`} handleClick={goBack}>Voltar</Button>
+        <Button className={`max-w-md mt-4 bg-green-800`} handleClick={goToCart}>Ir ao carrinho</Button>
+      </div>
     </section>
   );
 };
