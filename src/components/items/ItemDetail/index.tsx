@@ -16,7 +16,6 @@ const ItemDetail = ({id, category, title, description, pictureUrl, stock, price}
   const {onAddItem, cartItems, isInCart} = useContext(CartContext);
   let updatedStock = stock;
   if (isInCart(id)) {
-    const index = cartItems.findIndex(item => item.id === id);
     updatedStock = updatedStock - cartItems[(cartItems.findIndex(item => item.id === id))].quantity;
   }
   const [currentStock, setCurrentStock] = useState(updatedStock);
@@ -46,9 +45,9 @@ const ItemDetail = ({id, category, title, description, pictureUrl, stock, price}
       <h2 className={`text-center p-4 pb-0 text-2xl`}>R$ {price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h2>
       <p className={`text-center text-gray-400`}>{(currentStock > 0) ? (currentStock == 1) ? `(1 disponível)` : `(${currentStock} disponíveis)` : `(fora de estoque)`}</p>
       <ItemCount stock={currentStock} initial={1} onAdd={onAdd} />
-      <div className={`flex justify-center items-center gap-4`}>
-        <Button className={`max-w-md mt-4 bg-gray-600`} handleClick={goBack}>Voltar</Button>
-        <Button className={`max-w-md mt-4 bg-green-800`} handleClick={goToCart}>Ir ao carrinho</Button>
+      <div className={`flex justify-evenly items-center mt-4 px-4`}>
+        <Button className={`max-w-md bg-gray-50 text-gray-950 hover:underline`} handleClick={goBack}>&#8592; Voltar</Button>
+        <Button className={`max-w-md bg-gray-50 text-gray-950 hover:underline`} handleClick={goToCart}>Ir ao carrinho &#10148;</Button>
       </div>
     </section>
   );

@@ -12,7 +12,7 @@ const imageLoader = ({ src, width, quality }: ImageLoaderProps) => {
 
 const Item = ({id, title, description, pictureUrl, stock, price}: Product) => {
   return (
-    <Link href={`/item/${id}`}>
+    <Link href={`/item/${id}`} scroll={false}>
       <article className={`animate-entering rounded-lg justify-self-center w-72 border border-gray-300 bg-gradient-to-b from-gray-800 to-gray-900 text-gray-50 shadow-md hover:shadow-xl hover:border-gray-600`}>
         <h1 className={`text-center text-xl py-2`}>{title}</h1>
         <Image className={`h-64`} loader={imageLoader} src={pictureUrl} alt={title} width={320} height={320} />

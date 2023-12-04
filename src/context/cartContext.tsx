@@ -1,8 +1,7 @@
 'use client';
 
 import {createContext, ReactNode, useEffect, useReducer} from "react";
-import {CartItem} from "@/types/cart-item";
-import {Action_Type, CartReducerAction, CartState} from "@/types/cart-state";
+import {Action_Type, CartReducerAction, CartItem, CartState} from "@/types/cart";
 
 type CartContextType = {
   cartItems: CartItem[];
@@ -35,9 +34,11 @@ const cartReducer = (state: CartState, action: CartReducerAction) : CartState =>
   if (action.type === Action_Type.ADD) {
     const updatedTotalAmount = state.total + action.item!.price * action.item!.quantity
     const existingCartItemIndex = state.cartItems.findIndex(item => item.id === action.item!.id)
-    const existingCartItem = state.cartItems[existingCartItemIndex]
     let updatedItems;
-    if (existingCartItem) {
+    if (existingCartItemIndex === -1) {
+      updatedItems = state.cartItems.concat(action.item!);
+    } else {
+      const existingCartItem = state.cartItems[existingCartItemIndex]
       if (existingCartItem.quantity + action.item!.quantity > existingCartItem.stock) return state;
       let updatedItem;
       updatedItem = {
@@ -46,8 +47,6 @@ const cartReducer = (state: CartState, action: CartReducerAction) : CartState =>
       }
       updatedItems = [...state.cartItems];
       updatedItems[existingCartItemIndex] = updatedItem;
-    } else {
-      updatedItems = state.cartItems.concat(action.item!);
     }
     const cartState = {cartItems: updatedItems, total: updatedTotalAmount};
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cartState));
