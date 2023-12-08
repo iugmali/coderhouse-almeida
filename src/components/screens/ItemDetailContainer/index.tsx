@@ -18,9 +18,8 @@ const ItemDetailContainer = async ({id}: Props) => {
         <p>{e as string}</p>
       </main>
     );
-  } finally {
-
   }
+
   return (
     <main className={`flex flex-col h-full mt-4 mb-4`}>
       <ItemDetail {...product} />

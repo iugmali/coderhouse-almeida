@@ -36,20 +36,28 @@ const ItemDetail = ({id, category, title, description, pictureUrl, stock, price}
   }
 
   return (
-    <section className={`animate-entering flex flex-col`}>
+    <article className={`animate-entering flex flex-col`}>
       <h1 className={`text-center text-2xl`}>{title}</h1>
-      <div className={`mt-4 self-center rounded-lg shadow-lg`}>
-        <Image className={`h-64 rounded-lg`} loader={imageLoader} src={pictureUrl} alt={title} width={320} height={320} />
+      <div className={`flex flex-col md:grid md:grid-cols-3 mx-auto gap-4 place-items-center`}>
+        <div className={`col-span-2 flex flex-col justify-between items-center`}>
+          <div className={`mt-4 self-center rounded-lg shadow-lg`}>
+            <Image className={`h-64 rounded-lg`} loader={imageLoader} src={pictureUrl} alt={title} width={320} height={320} />
+          </div>
+          <p className={`max-w-md text-justify mx-auto px-4 mt-4`}>{description}</p>
+        </div>
+        <div className={`flex flex-wrap md:flex-col gap-8 mt-4 justify-evenly md:justify-normal items-center mx-auto`}>
+          <div className={`mx-auto flex flex-col`}>
+            <h2 className={`text-center p-4 pb-0 text-2xl`}>R$ {price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h2>
+            <p className={`text-center text-gray-400`}>{(currentStock > 0) ? (currentStock == 1) ? `(1 disponível)` : `(${currentStock} disponíveis)` : `(fora de estoque)`}</p>
+          </div>
+          <ItemCount stock={currentStock} initial={1} onAdd={onAdd} />
+          <div className={`flex flex-wrap md:flex-col justify-end items-center gap-8 mt-4 px-4 mx-auto`}>
+            <Button className={`mx-auto max-w-md bg-gray-50 text-gray-950 border border-gray-950`} handleClick={goBack}>Voltar</Button>
+            {isInCart(id) && <Button className={`mx-auto max-w-md bg-gray-50 text-gray-950 border border-gray-950`} handleClick={goToCart}>Finalizar minha compra</Button>}
+          </div>
+        </div>
       </div>
-      <p className={`max-w-md text-justify mx-auto px-4 mt-4`}>{description}</p>
-      <h2 className={`text-center p-4 pb-0 text-2xl`}>R$ {price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h2>
-      <p className={`text-center text-gray-400`}>{(currentStock > 0) ? (currentStock == 1) ? `(1 disponível)` : `(${currentStock} disponíveis)` : `(fora de estoque)`}</p>
-      <ItemCount stock={currentStock} initial={1} onAdd={onAdd} />
-      <div className={`flex justify-evenly items-center mt-4 px-4`}>
-        <Button className={`max-w-md bg-gray-50 text-gray-950 hover:underline`} handleClick={goBack}>&#8592; Voltar</Button>
-        <Button className={`max-w-md bg-gray-50 text-gray-950 hover:underline`} handleClick={goToCart}>Ir ao carrinho &#10148;</Button>
-      </div>
-    </section>
+    </article>
   );
 };
 

@@ -5,19 +5,36 @@ import {useRouter} from "next/navigation";
 import {useContext, useState} from "react";
 import CartContext from "@/context/cartContext";
 import {AnimatePresence, motion} from "framer-motion";
+import Modal from "@/components/ui/Modal";
+import CartList from "@/components/cart/CartList";
 
 const CartContainer = () => {
-  const {cartItems, clearCart, onRemoveItem, onAddItem, total} = useContext(CartContext);
+  const {clearCart, totalItems} = useContext(CartContext);
   const router = useRouter();
+  const [isEmptyingCart, setIsEmptyingCart] = useState(false);
 
-  const goBack = () => {
-    router.back();
+  const handleClearCart = () => {
+    setIsEmptyingCart(false);
+    clearCart();
   }
 
   return (
     <main className={`flex flex-col mt-4`}>
+      <AnimatePresence>
+        {isEmptyingCart && (
+          <Modal onClose={() => setIsEmptyingCart(false)}>
+            <h2 className={`text-xl text-center m-4`}>Esvaziar Carrinho?</h2>
+            <p>Tem certeza que deseja esvaziar todo o seu carrinho?</p>
+            <div className={`flex gap-4 m-4 justify-end`}>
+              <Button handleClick={() => setIsEmptyingCart(false)}>Não</Button>
+              <Button className={`bg-red-700`} handleClick={handleClearCart}>Sim, esvaziar!</Button>
+            </div>
+          </Modal>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence mode={`wait`}>
-        {cartItems.length === 0 ?
+        {totalItems === 0 ?
           (
             <motion.p
               key={"cart-text"}
@@ -34,64 +51,34 @@ const CartContainer = () => {
             </motion.p>
           ) :
           (
-            <motion.ul
-              key={"cart-list"}
-              className={`px-14 flex flex-col gap-4`}
-              exit={{
-                y: -30,
-                opacity: 0,
-                transition: {duration: 0.3}
-              }}
-            >
-              <AnimatePresence>
-                {cartItems.map(cartItem => (
-                  <motion.li
-                    layout
-                    key={cartItem.id}
-                    exit={{
-                      y: -30,
-                      opacity: 0,
-                      transition: {duration: 0.3}
-                    }}
-                    className={`rounded-lg px-4 py-2 border flex items-center justify-between border-gray-600 hover:border-gray-950`}
-                  >
-                    <div className={`flex-[3] flex flex-col md:flex-row hover:cursor-pointer`}
-                         onClick={() => router.push(`/item/${cartItem.id}`, {scroll: false})}>
-                      <p className={`flex-1`}>{cartItem.title}</p>
-                      <p className={`flex-1`}>Quantidade: {cartItem.quantity}</p>
-                      <p className={`flex-1`}>Total:
-                        R$ {(cartItem.quantity * cartItem.price).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
-                    </div>
-                    <div className={`flex-1 flex flex-col-reverse md:flex-row gap-4 items-end md:justify-end`}>
-                      <Button
-                        title={`remover`}
-                        className={`bg-gray-50 text-gray-950 transition-colors hover:bg-gray-200`}
-                        handleClick={() => {
-                          onRemoveItem(cartItem.id);
-                        }}>-</Button>
-                      <Button
-                        title={`adicionar`}
-                        className={`bg-gray-50 text-gray-950 transition-colors hover:bg-gray-200`}
-                        handleClick={() => onAddItem({...cartItem, quantity: 1})}>+</Button>
-                    </div>
-                  </motion.li>
-                ))}
-              </AnimatePresence>
-
-              <li className={`flex px-4 py-2 justify-between items-center`}>
-                <p className={`text-xl`}>Total</p>
-                <p className={`text-xl`}>R$ {total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
-              </li>
-            </motion.ul>
+            <CartList />
           )
         }
       </AnimatePresence>
 
 
-      <div className={`flex justify-center gap-8`}>
-        <Button className={`mt-4 bg-green-800`} handleClick={goBack}>Voltar</Button>
-        {cartItems.length > 0 && <Button className={`mt-4 bg-red-600`} handleClick={clearCart}>Esvaziar Carrinho</Button>}
-      </div>
+      <motion.div
+        key={`cart-action-buttons`}
+        initial={{
+          y: -30,
+          opacity: 0
+        }}
+        animate={{
+          y: 0,
+          opacity: 1
+        }}
+        className={`mt-4 mx-4 flex justify-center gap-4 md:gap-8`}>
+
+        {totalItems > 0 ? (
+          <>
+            <Button className={`bg-gray-800`} handleClick={() => router.push('/')}>Continuar Comprando</Button>
+            <Button className={`bg-red-600`} handleClick={() => setIsEmptyingCart(true)}>Esvaziar Carrinho</Button>
+            <Button className={`bg-green-800`} handleClick={() => {}}>Prosseguir para Pagamento</Button>
+          </>
+          ) : (
+          <Button className={``} handleClick={() => router.push('/')}>Retornar para a tela inicial</Button>
+      )}
+      </motion.div>
     </main>
   )
 }
