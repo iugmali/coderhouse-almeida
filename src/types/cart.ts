@@ -5,16 +5,28 @@ export type CartItem = Product & {
 }
 
 export type CartState = {
-  cartItems: CartItem[],
-  total: number
+  cartItems: CartItem[];
+  totalItems: number;
+  totalPrice: number;
 }
 
-export type CartReducerAction = {
-  type: Action_Type;
-  item?: CartItem;
-  id?: string;
-  cartState?: CartState;
+type CartReducerAddAction = {
+  type: Action_Type.ADD;
+  item: CartItem;
 }
+type CartReducerRemoveAction = {
+  type: Action_Type.REMOVE;
+  id: string;
+}
+type CartReducerRetrieveAction = {
+  type: Action_Type.RETRIEVE;
+  cartState: CartState;
+}
+type CartReducerClearAction = {
+  type: Action_Type.CLEAR;
+}
+
+export type CartReducerAction = CartReducerAddAction | CartReducerRemoveAction | CartReducerRetrieveAction | CartReducerClearAction;
 
 export enum Action_Type {
   ADD,

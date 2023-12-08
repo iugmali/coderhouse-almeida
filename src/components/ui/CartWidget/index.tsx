@@ -2,16 +2,15 @@ import {motion, AnimatePresence} from "framer-motion";
 
 type Props = {
   quantity: number;
-  total: number;
 }
 
-const CartWidget = ({quantity, total}: Props) => {
+const CartWidget = ({quantity}: Props) => {
   return (
     <button className="relative hover:opacity-50">
       <AnimatePresence>
         {(quantity) ?
           <motion.div
-            key={total}
+            key={quantity}
             animate={{
               scale: [1.3, 1]
             }}

@@ -8,7 +8,7 @@ import CartContext from "@/context/cartContext";
 import { motion } from "framer-motion";
 
 const Navbar = () => {
-  const {cartItems, total} = useContext(CartContext);
+  const {totalItems} = useContext(CartContext);
   const {category} = useParams();
   const [menuOpen, setMenuOpen] = useState(false);
   const handleMenuOpen = () => {
@@ -22,7 +22,7 @@ const Navbar = () => {
       >
         <div className="flex px-8 py-6 justify-between items-start mx-auto max-w-3xl">
           <Link className={'font-extrabold font-mono'} href={'/'} scroll={false}>Coderstore</Link>
-          <Link href={`/cart`} scroll={false}><CartWidget quantity={cartItems.length} total={total} /></Link>
+          {(totalItems > 0) && <Link href={`/cart`} scroll={false}><CartWidget quantity={totalItems} /></Link>}
           <div className={`flex flex-col items-end justify-normal`}>
             <button className={`${menuOpen ? 'mb-16 mt-3' : ''} md:hidden`} onClick={handleMenuOpen}>
               <div className={`transition-all ${menuOpen ? 'space-y-0' : 'space-y-2'}`}>

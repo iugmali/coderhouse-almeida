@@ -5,7 +5,8 @@ import {Action_Type, CartReducerAction, CartItem, CartState} from "@/types/cart"
 
 type CartContextType = {
   cartItems: CartItem[];
-  total: number;
+  totalItems: number;
+  totalPrice: number;
   onAddItem: (item: CartItem) => void;
   onRemoveItem: (id: string) => void;
   clearCart: () => void;
@@ -14,7 +15,8 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType>({
   cartItems: [],
-  total: 0,
+  totalItems: 0,
+  totalPrice: 0,
   onAddItem: (item) => {},
   onRemoveItem: (id) => {},
   clearCart: () => {},
@@ -23,7 +25,8 @@ const CartContext = createContext<CartContextType>({
 
 const defaultCartState: CartState = {
   cartItems: [],
-  total: 0
+  totalItems: 0,
+  totalPrice: 0
 }
 
 const LOCAL_STORAGE_KEY = 'coderstore_almeida_cart';
@@ -32,32 +35,34 @@ const LOCAL_STORAGE_KEY = 'coderstore_almeida_cart';
 const cartReducer = (state: CartState, action: CartReducerAction) : CartState => {
 
   if (action.type === Action_Type.ADD) {
-    const updatedTotalAmount = state.total + action.item!.price * action.item!.quantity
-    const existingCartItemIndex = state.cartItems.findIndex(item => item.id === action.item!.id)
+    const updatedTotalPrice = state.totalPrice + action.item.price * action.item.quantity;
+    const updatedTotalItems = state.totalItems + action.item.quantity;
+    const existingCartItemIndex = state.cartItems.findIndex(item => item.id === action.item.id);
     let updatedItems;
     if (existingCartItemIndex === -1) {
-      updatedItems = state.cartItems.concat(action.item!);
+      updatedItems = state.cartItems.concat(action.item);
     } else {
       const existingCartItem = state.cartItems[existingCartItemIndex]
-      if (existingCartItem.quantity + action.item!.quantity > existingCartItem.stock) return state;
+      if (existingCartItem.quantity + action.item.quantity > existingCartItem.stock) return state;
       let updatedItem;
       updatedItem = {
         ...existingCartItem,
-        quantity: existingCartItem.quantity + action.item!.quantity
+        quantity: existingCartItem.quantity + action.item.quantity
       }
       updatedItems = [...state.cartItems];
       updatedItems[existingCartItemIndex] = updatedItem;
     }
-    const cartState = {cartItems: updatedItems, total: updatedTotalAmount};
+    const cartState = {cartItems: updatedItems, totalPrice: updatedTotalPrice, totalItems: updatedTotalItems};
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cartState));
     return cartState;
   }
 
   if (action.type === Action_Type.REMOVE) {
-    const existingCartItemIndex = state.cartItems.findIndex(item => item.id === action.id!);
+    const existingCartItemIndex = state.cartItems.findIndex(item => item.id === action.id);
     if (existingCartItemIndex === -1) return state;
     const existingItem = state.cartItems[existingCartItemIndex];
-    const updatedTotalAmount = state.total - existingItem.price;
+    const updatedTotalPrice = state.totalPrice - existingItem.price;
+    const updatedTotalItems = state.totalItems - 1;
     let updatedItems;
     if (existingItem.quantity === 1) {
       updatedItems = [...state.cartItems];
@@ -67,7 +72,7 @@ const cartReducer = (state: CartState, action: CartReducerAction) : CartState =>
       updatedItems = [...state.cartItems];
       updatedItems[existingCartItemIndex] = updatedItem;
     }
-    const cartState = {cartItems: updatedItems, total: updatedTotalAmount};
+    const cartState = {cartItems: updatedItems, totalPrice: updatedTotalPrice, totalItems: updatedTotalItems};
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cartState));
     return cartState;
   }
@@ -78,7 +83,7 @@ const cartReducer = (state: CartState, action: CartReducerAction) : CartState =>
   }
 
   if (action.type === Action_Type.RETRIEVE) {
-    return action.cartState!;
+    return action.cartState;
   }
 
   return defaultCartState;
@@ -115,7 +120,8 @@ export const CartContextProvider = ({children}:Props) => {
   return (
     <CartContext.Provider value={{
       cartItems: cartState.cartItems,
-      total: cartState.total,
+      totalItems: cartState.totalItems,
+      totalPrice: cartState.totalPrice,
       onAddItem: addItemToCartHandler,
       onRemoveItem: removeItemFromCartHandler,
       clearCart: clearCartHandler,
