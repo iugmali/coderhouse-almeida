@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
-import React, {Suspense} from "react";
+import React from "react";
 import Navbar from "@/components/Navbar";
-import Loading from "@/app/loading";
 import {CartContextProvider} from "@/context/cartContext";
+import {inter} from "@/app/fonts";
 
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Coderstore Almeida',
@@ -20,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`min-h-screen bg-gray-50 ${inter.className}`}>
+      <body className={`min-h-screen bg-gray-50 ${inter.className} antialiased`}>
         <CartContextProvider>
           <Navbar />
           {children}

@@ -4,6 +4,8 @@ import {CartItem} from "@/types/cart";
 import {useRouter} from "next/navigation";
 import {useContext} from "react";
 import CartContext from "@/context/cartContext";
+import {formatCurrency} from "@/lib/util";
+import {jetBrainsMono, montserrat} from "@/app/fonts";
 
 type Props = {
   cartItem: CartItem
@@ -26,10 +28,9 @@ const CartItem = ({cartItem}: Props) => {
     >
       <div className={`flex-[3] flex flex-col md:flex-row hover:cursor-pointer`}
            onClick={() => router.push(`/item/${cartItem.id}`, {scroll: false})}>
-        <p className={`flex-1`}>{cartItem.title}</p>
-        <p className={`flex-1`}>Quantidade: {cartItem.quantity}</p>
-        <p className={`flex-1`}>Total:
-          R$ {(cartItem.quantity * cartItem.price).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+        <p className={`${montserrat.className} flex-1`}>{cartItem.title}</p>
+        <p className={`flex-1`}>Quantidade: <span className={`${jetBrainsMono.className}`}>{cartItem.quantity}</span></p>
+        <p className={`flex-1`}>Total: <span className={`${jetBrainsMono.className}`}>{formatCurrency(cartItem.quantity * cartItem.price)}</span></p>
       </div>
       <div className={`flex-1 flex flex-col-reverse md:flex-row gap-4 items-end md:justify-end`}>
         <Button
