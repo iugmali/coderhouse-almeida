@@ -1,23 +1,26 @@
 'use client';
 
-import {Product} from "@/types/product";
+import {ItemType} from "@/types/item";
 import {useState} from "react";
 import ItemCount from "@/components/items/ItemCount";
 import Image, {ImageLoaderProps} from "next/image";
 import Link from "next/link";
+import {formatCurrency} from "@/lib/util";
+import Button, {TextButton} from "@/components/ui/Button";
+import {jetBrainsMono, montserrat} from "@/app/fonts";
 
 const imageLoader = ({ src, width, quality }: ImageLoaderProps) => {
   return `${src}?w=${width}&q=${quality || 75}`
 }
 
-const Item = ({id, title, description, pictureUrl, stock, price}: Product) => {
+const Item = ({id, title, description, pictureUrl, stock, price}: ItemType) => {
   return (
     <Link href={`/item/${id}`} scroll={false}>
-      <article className={`animate-entering rounded-lg justify-self-center w-72 border border-gray-300 bg-gradient-to-b from-gray-800 to-gray-900 text-gray-50 shadow-md hover:shadow-xl hover:border-gray-600`}>
-        <h1 className={`text-center text-xl py-2`}>{title}</h1>
-        <Image className={`h-64`} loader={imageLoader} src={pictureUrl} alt={title} width={320} height={320} />
-        <p className={`text-center hover:bg-gray-800 transition-all`}>Ver detalhes</p>
-        <h2 className={`text-center p-4 text-2xl`}>R$ {price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h2>
+      <article className={`transition-all group animate-entering rounded-3xl justify-self-center w-[288px] h-[350px] text-gray-950 shadow-sm hover:shadow-2xl flex flex-col justify-center items-center`}>
+        <div className={`relative h-[200px] w-[200px] rounded-3xl overflow-hidden`}><Image className={`object-contain`} loader={imageLoader} src={pictureUrl} alt={title} fill={true} /></div>
+        <h1 className={`${montserrat.className} text-center text-xl py-2`}>{title}</h1>
+        <p className={`${jetBrainsMono.className} text-center transition-all`}>{formatCurrency(price)}</p>
+        <p className={`mt-2 text-xs underline italic text-gray-500`}>ver detalhes...</p>
       </article>
     </Link>
   )

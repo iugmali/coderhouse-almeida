@@ -1,31 +1,40 @@
 'use client';
 
-import {Product} from "@/types/product";
+import {ItemType} from "@/types/item";
 import Image, {ImageLoaderProps} from "next/image";
-import Button from "@/components/ui/Button";
-import {useContext, useState} from "react";
+import Button, {TextButton} from "@/components/ui/Button";
+import {useCallback, useContext, useEffect, useLayoutEffect, useState} from "react";
 import ItemCount from "@/components/items/ItemCount";
 import {useRouter} from "next/navigation";
 import CartContext from "@/context/cartContext";
+import {formatCurrency} from "@/lib/util";
+import {jetBrainsMono, montserrat} from "@/app/fonts";
 
 const imageLoader = ({ src, width, quality }: ImageLoaderProps) => {
   return `${src}?w=${width}&q=${quality || 75}`
 }
 
-const ItemDetail = ({id, category, title, description, pictureUrl, stock, price}:Product) => {
-  const {onAddItem, cartItems, isInCart} = useContext(CartContext);
-  let updatedStock = stock;
-  if (isInCart(id)) {
-    updatedStock = updatedStock - cartItems[(cartItems.findIndex(item => item.id === id))].quantity;
-  }
-  const [currentStock, setCurrentStock] = useState(updatedStock);
+const ItemDetail = ({id, categoryId, title, description, pictureUrl, stock, price}:ItemType) => {
   const router = useRouter();
+  const {onAddItem, cartItems, isInCart} = useContext(CartContext);
+
+  const [currentStock, setCurrentStock] = useState(stock);
+  const [loadedStock, setLoadedStock] = useState(false);
+
+  let quantityInCart = 0;
+  if (isInCart(id)) {
+    quantityInCart = cartItems[(cartItems.findIndex(item => item.id === id))].quantity;
+  }
 
   const onAdd = (quantity: number = 1) => {
     if (quantity > currentStock) return;
-    onAddItem({title, description, pictureUrl, stock, price, id, category, quantity});
-    setCurrentStock((prevState) => prevState - quantity);
+    onAddItem({title, description, pictureUrl, stock, price, id, categoryId, quantity});
   }
+
+  useEffect(() => {
+    setCurrentStock(stock - quantityInCart);
+    setLoadedStock(true);
+  }, [quantityInCart])
 
   const goBack = () => {
     router.back();
@@ -36,27 +45,32 @@ const ItemDetail = ({id, category, title, description, pictureUrl, stock, price}
   }
 
   return (
-    <article className={`animate-entering flex flex-col`}>
-      <h1 className={`text-center text-2xl`}>{title}</h1>
-      <div className={`flex flex-col md:grid md:grid-cols-3 mx-auto gap-4 place-items-center`}>
-        <div className={`col-span-2 flex flex-col justify-between items-center`}>
-          <div className={`mt-4 self-center rounded-lg shadow-lg`}>
-            <Image className={`h-64 rounded-lg`} loader={imageLoader} src={pictureUrl} alt={title} width={320} height={320} />
+    <article className={`p-4 border border-gray-950 rounded-3xl flex flex-col md:grid md:grid-cols-3 mx-4 gap-0 overflow-hidden`}>
+        <div
+          className={`md:col-span-2 flex flex-col justify-between items-center`}>
+          <div className={`mt-4 h-60 w-60 self-center relative`}>
+            <Image className={`object-contain`} loader={imageLoader} src={pictureUrl} alt={title} fill={true} />
           </div>
+          <h1 className={`${montserrat.className} text-center text-2xl`}>{title}</h1>
           <p className={`max-w-md text-justify mx-auto px-4 mt-4`}>{description}</p>
         </div>
-        <div className={`flex flex-wrap md:flex-col gap-8 mt-4 justify-evenly md:justify-normal items-center mx-auto`}>
+        {loadedStock && <div
+          className={`p-4 flex flex-col gap-8 mt-0 justify-evenly md:justify-normal items-center mx-auto`}>
           <div className={`mx-auto flex flex-col`}>
-            <h2 className={`text-center p-4 pb-0 text-2xl`}>R$ {price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h2>
-            <p className={`text-center text-gray-400`}>{(currentStock > 0) ? (currentStock == 1) ? `(1 disponível)` : `(${currentStock} disponíveis)` : `(fora de estoque)`}</p>
+            <h2
+              className={`${jetBrainsMono.className} text-center p-4 pb-0 text-2xl`}>{formatCurrency(price)}</h2>
+            <p className={`text-center text-gray-400`}>
+              {`(`}{(currentStock > 0) ? (currentStock == 1) ? `1 disponível` : `${currentStock} disponíveis` : `${(!isInCart(id)) ? `fora de estoque` : `0 disponíveis`}`}{isInCart(id) ? ` - ${quantityInCart} no carrinho` : ``}{`)`}
+            </p>
           </div>
-          <ItemCount stock={currentStock} initial={1} onAdd={onAdd} />
-          <div className={`flex flex-wrap md:flex-col justify-end items-center gap-8 mt-4 px-4 mx-auto`}>
-            <Button className={`mx-auto max-w-md bg-gray-50 text-gray-950 border border-gray-950`} handleClick={goBack}>Voltar</Button>
-            {isInCart(id) && <Button className={`mx-auto max-w-md bg-gray-50 text-gray-950 border border-gray-950`} handleClick={goToCart}>Finalizar minha compra</Button>}
+          <ItemCount stock={currentStock} initial={1} onAdd={onAdd}/>
+          <div className={`flex flex-wrap md:flex-col justify-end items-center gap-8 px-4 mx-auto`}>
+            <TextButton className={`mx-auto w-60 border border-gray-950`} handleClick={goBack}>Voltar</TextButton>
+            {isInCart(id) &&
+              <TextButton className={`mx-auto w-60 border border-gray-950`} handleClick={goToCart}>Finalizar minha
+                compra</TextButton>}
           </div>
-        </div>
-      </div>
+        </div>}
     </article>
   );
 };

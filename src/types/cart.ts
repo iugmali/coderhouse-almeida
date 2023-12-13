@@ -1,6 +1,6 @@
-import {Product} from "@/types/product";
+import {ItemType} from "@/types/item";
 
-export type CartItem = Product & {
+export type CartItem = ItemType & {
   quantity: number;
 }
 

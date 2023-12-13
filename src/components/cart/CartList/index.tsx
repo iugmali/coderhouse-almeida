@@ -2,6 +2,8 @@ import {AnimatePresence, motion} from "framer-motion";
 import {useContext} from "react";
 import CartContext from "@/context/cartContext";
 import CartItem from "@/components/cart/CartItem";
+import {formatCurrency} from "@/lib/util";
+import {jetBrainsMono} from "@/app/fonts";
 
 const CartList = () => {
   const {cartItems, totalPrice} = useContext(CartContext);
@@ -30,9 +32,9 @@ const CartList = () => {
         ))}
       </AnimatePresence>
 
-      <motion.li layout key={`total-price`} className={`flex px-4 py-2 justify-between items-center`}>
+      <motion.li layoutId={'cart-total'} key={`total-price`} className={`flex px-4 py-2 justify-between items-center`}>
         <p className={`text-xl`}>Total</p>
-        <p className={`text-xl`}>R$ {totalPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+        <p className={`${jetBrainsMono.className} text-xl`}>{formatCurrency(totalPrice)}</p>
       </motion.li>
     </motion.ul>
   )
