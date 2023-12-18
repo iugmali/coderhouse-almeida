@@ -1,4 +1,4 @@
-import ItemListContainer from "@/components/screens/ItemListContainer";
+import ItemListScreen from "../../../components/screens/ItemList";
 import {getCategories, getCategory} from "@/lib/data";
 
 type Props = {
@@ -16,11 +16,11 @@ export const generateStaticParams = async () => {
   }))
 };
 
-const CategoryPage = async ({params: {category: categoryId}} : Props) => {
+const ItemListByCategoryPage = async ({params: {category: categoryId}} : Props) => {
   const category = await getCategory(categoryId)
   return (
-    <ItemListContainer greeting={`Olá, visitante! Listando ${category!.name}.`} category={category!.key} />
+    <ItemListScreen greeting={`Olá, visitante! Listando ${category!.name}.`} category={category!.key} />
   );
 };
 
-export default CategoryPage;
+export default ItemListByCategoryPage;

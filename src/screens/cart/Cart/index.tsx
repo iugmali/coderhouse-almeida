@@ -1,15 +1,17 @@
 'use client';
 
-import Button from "@/components/ui/Button";
+import Button, {TextButton} from "@/components/ui/Button";
 import {useRouter} from "next/navigation";
-import {useContext, useState} from "react";
-import CartContext from "@/context/cartContext";
+import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Modal from "@/components/ui/Modal";
 import CartList from "@/components/cart/CartList";
+import {useCartStore} from "@/store/cart.store";
 
-const CartContainer = () => {
-  const {clearCart, totalItems} = useContext(CartContext);
+const CartScreen = () => {
+  const clearCart = useCartStore(state => state.clearCart);
+  const totalItems = useCartStore(state => state.totalItems);
+
   const router = useRouter();
   const [isEmptyingCart, setIsEmptyingCart] = useState(false);
 
@@ -24,9 +26,9 @@ const CartContainer = () => {
         {isEmptyingCart && (
           <Modal onClose={() => setIsEmptyingCart(false)}>
             <h2 className={`text-xl text-center m-4`}>Esvaziar Carrinho?</h2>
-            <p>Tem certeza que deseja esvaziar todo o seu carrinho?</p>
+            <p className={`text-center`}>Tem certeza que deseja esvaziar todo o seu carrinho?</p>
             <div className={`flex gap-4 m-4 justify-end`}>
-              <Button handleClick={() => setIsEmptyingCart(false)}>Não</Button>
+              <TextButton className={`border border-gray-950`} handleClick={() => setIsEmptyingCart(false)}>Não</TextButton>
               <Button className={`bg-red-700`} handleClick={handleClearCart}>Sim, esvaziar!</Button>
             </div>
           </Modal>
@@ -83,4 +85,4 @@ const CartContainer = () => {
   )
 }
 
-export default CartContainer;
+export default CartScreen;
