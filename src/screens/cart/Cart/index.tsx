@@ -1,14 +1,15 @@
 'use client';
 
-import Button, {TextButton} from "@/components/ui/Button";
+import Button, {LinkButton, TextButton} from "@/components/ui/Button";
 import {useRouter} from "next/navigation";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Modal from "@/components/ui/Modal";
 import CartList from "@/components/cart/CartList";
 import {useCartStore} from "@/store/cart.store";
 
 const CartScreen = () => {
+
   const clearCart = useCartStore(state => state.clearCart);
   const totalItems = useCartStore(state => state.totalItems);
 
@@ -20,8 +21,16 @@ const CartScreen = () => {
     clearCart();
   }
 
+  // Esse código precisa ser passado para clients components que utilizam zustand com persist, para garantir que o zustand rode depois do nextjs hidratar
+  const [hasHydrated, setHasHydrated] = useState(false);
+  useEffect(() => {
+    useCartStore.persist.rehydrate();
+    setHasHydrated(true);
+  }, []);
+  if (!hasHydrated) return null;
+
   return (
-    <main className={`flex flex-col mt-4`}>
+    <main className={`flex flex-col mt-4`} suppressHydrationWarning={true}>
       <AnimatePresence>
         {isEmptyingCart && (
           <Modal onClose={() => setIsEmptyingCart(false)}>
@@ -75,10 +84,10 @@ const CartScreen = () => {
           <>
             <Button className={`bg-gray-800`} handleClick={() => router.push('/')}>Continuar Comprando</Button>
             <Button className={`bg-red-600`} handleClick={() => setIsEmptyingCart(true)}>Esvaziar Carrinho</Button>
-            <Button className={`bg-green-800`} handleClick={() => {}}>Prosseguir para Pagamento</Button>
+            <Button className={`bg-green-800`} handleClick={() => router.push('/cart/checkout')}>Prosseguir para Checkout</Button>
           </>
           ) : (
-          <Button className={``} handleClick={() => router.push('/')}>Retornar para a tela inicial</Button>
+          <LinkButton className={``} href={`/`}>Retornar para a tela inicial</LinkButton>
       )}
       </motion.div>
     </main>

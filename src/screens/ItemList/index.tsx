@@ -1,13 +1,15 @@
 import {fetchItems} from "@/lib/firebase/data/items";
 import {TItem} from "@/types/item";
 import ItemList from "@/components/items/ItemList";
-import {initFirebaseApp} from "@/lib/firebase/config";
+import {auth} from "@/lib/auth";
+import {jetBrainsMono, montserrat} from "@/app/fonts";
 
 type Props = {
   category?: string;
 }
 
 const ItemListScreen = async ({category}: Props) => {
+  const session = await auth();
   let products: TItem[] = [];
   await new Promise((res, rej) => setTimeout(() => res(true), 3000));
   try {
@@ -19,11 +21,11 @@ const ItemListScreen = async ({category}: Props) => {
     <main className={`flex flex-col mt-4 mb-4`}>
       {products.length > 0 ? (
         <>
-          <h1 className={`text-center`}>Olá, visitante! Listando {category ?? 'todos os produtos'}.</h1>
+          <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Listando {category ?? 'todos os produtos'}.</h1>
           <ItemList items={products}/>
         </>
       ) : (
-        <h1 className={`text-center`}>Olá, visitante! Não temos {category ?? 'produtos'}.</h1>
+        <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Não temos {category ?? 'produtos'}.</h1>
       )}
     </main>
   );
