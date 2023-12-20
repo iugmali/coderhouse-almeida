@@ -18,4 +18,4 @@ export const GET = auth(async function GET(req) {
     }
   }
   return NextResponse.json({ message: "Não autenticado." }, { status: 401 });
-})
+}) as any // hack to workaround protected route auth type error
