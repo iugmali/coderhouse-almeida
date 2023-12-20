@@ -1,7 +1,7 @@
 'use client';
 
 import {useState} from "react";
-import Button from "@/components/ui/Button";
+import {TextButton} from "@/components/ui/Button";
 
 type Props = {
   stock: number;
@@ -16,7 +16,6 @@ const enum Operation {
 
 const ItemCount = ({stock, initial, onAdd}: Props) => {
   const [quantity, setQuantity] = useState(initial);
-
   const changeQuantityHandler = (operation: Operation) => {
     switch (operation) {
       case Operation.Add:
@@ -38,14 +37,14 @@ const ItemCount = ({stock, initial, onAdd}: Props) => {
   }
 
   return (
-    <article className={`mx-auto flex flex-col w-60 justify-center items-center`}>
+    <div className={`mx-auto flex flex-col w-60 justify-center items-center`}>
       <div className={`rounded-lg flex w-full justify-between items-center border-gray-600 border-2`}>
         <button className={`flex-1 bg-gray-600 bg-opacity-20 active:bg-opacity-70`} onClick={() => changeQuantityHandler(Operation.Subtract)}>-</button>
         <div className={`flex-1 text-center`}>{quantity}</div>
         <button className={`flex-1 bg-gray-600 bg-opacity-20 active:bg-opacity-70`} onClick={() => changeQuantityHandler(Operation.Add)}>+</button>
       </div>
-      <Button className={`mt-4 w-full bg-gradient-to-b from-gray-800 to-gray-900 disabled:from-gray-500 disabled:to-gray-600 disabled:hover:cursor-not-allowed`} handleClick={addHandler} disabled={stock == 0}>Adicionar ao carrinho</Button>
-    </article>
+      <TextButton className={`text-gray-50 mt-4 w-full bg-gradient-to-b from-gray-800 to-gray-900 disabled:from-gray-500 disabled:to-gray-600 disabled:hover:cursor-not-allowed`} handleClick={addHandler} disabled={stock == 0}>Adicionar ao carrinho</TextButton>
+    </div>
   )
 }
 
