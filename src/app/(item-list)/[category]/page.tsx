@@ -1,5 +1,5 @@
-import ItemListScreen from "../../../components/screens/ItemList";
-import {getCategories, getCategory} from "@/lib/data";
+import ItemListScreen from "@/screens/ItemList";
+import {fetchCategories, fetchCategory} from "@/lib/firebase/data/items";
 
 type Props = {
   params: {
@@ -10,16 +10,15 @@ type Props = {
 export const dynamicParams = false;
 
 export const generateStaticParams = async () => {
-  const categories = await getCategories();
+  const categories = await fetchCategories();
   return categories.map((category) => ({
     category: category.id,
   }))
 };
 
 const ItemListByCategoryPage = async ({params: {category: categoryId}} : Props) => {
-  const category = await getCategory(categoryId)
   return (
-    <ItemListScreen greeting={`Olá, visitante! Listando ${category!.name}.`} category={category!.key} />
+    <ItemListScreen category={categoryId} />
   );
 };
 

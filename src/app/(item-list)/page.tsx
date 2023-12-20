@@ -1,8 +1,8 @@
-import ItemListScreen from "../../components/screens/ItemList";
+import ItemListScreen from "@/screens/ItemList";
 
 const ItemListPage = async () => {
   return (
-    <ItemListScreen greeting={`Olá, visitante! Listando todos os produtos.`} />
+    <ItemListScreen />
   );
 };
 
