@@ -158,7 +158,7 @@ const unshuffledItems = [
     title: 'Go',
     description: 'Go é uma linguagem de programação compilada desenvolvida pelo Google, conhecida por sua eficiência e concorrência.',
     price: 59999,
-    images: ['go.png'],
+    images: ['go-1.png','go.png'],
     stock: 80,
   },
   {
@@ -190,7 +190,7 @@ const unshuffledItems = [
     title: 'Zustand',
     description: 'Zustand é uma biblioteca pequena e simples para gerenciamento de estado global em aplicações React.',
     price: 19999,
-    images: ['zustand.jpeg'],
+    images: ['zustand-1.jpeg','zustand.jpeg'],
     stock: 40,
   },
   {
@@ -302,7 +302,7 @@ const unshuffledItems = [
     title: 'Kotlin',
     description: 'Kotlin é uma linguagem de programação moderna para desenvolvimento de aplicativos Android, apoiada pelo Google.',
     price: 34999,
-    images: ['kotlin.jpg'],
+    images: ['kotlin-1.jpeg', 'kotlin.jpg'],
     stock: 80,
   },
   {
