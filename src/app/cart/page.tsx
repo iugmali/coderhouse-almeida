@@ -1,7 +1,7 @@
-import CartContainer from "@/components/screens/CartContainer";
+import CartScreen from "../../screens/cart/Cart";
 
-const Cart = () => {
-  return <CartContainer />;
+const CartPage = () => {
+  return <CartScreen />;
 }
 
-export default Cart;
+export default CartPage;

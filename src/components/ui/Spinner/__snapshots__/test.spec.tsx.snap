@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner renders unchanged 1`] = `
+<div
+  class="rounded-full w-16 h-16 border-gray-200 border-4 border-t-blue-500 border-l-blue-500 animate-spin"
+/>
+`;

@@ -1,8 +1,8 @@
-import {ItemType} from "@/types/item";
+import {TItem} from "@/types/item";
 import Item from "@/components/items/Item";
 
 type Props = {
-  items: ItemType[]
+  items: TItem[]
 }
 
 const ItemList = ({items} : Props) => {

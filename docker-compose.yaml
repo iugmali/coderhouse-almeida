@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  coderstore-almeida:
+    build:
+      context: .
+    container_name: coderstore-almeida
+    networks:
+      - coderstore-almeida-network
+    ports:
+      - "3344:3000"
+networks:
+  coderstore-almeida-network:
+    driver: bridge

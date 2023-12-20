@@ -1,35 +1,47 @@
-import {ItemType} from "@/types/item";
+import {TItem} from "@/types/item";
 
-export type CartItem = ItemType & {
+export type TCartItem = TItem & {
   quantity: number;
 }
 
-export type CartState = {
-  cartItems: CartItem[];
+export type TCartState = {
+  cartItems: TCartItem[];
   totalItems: number;
   totalPrice: number;
 }
 
-type CartReducerAddAction = {
+type TCartReducerAddAction = {
   type: Action_Type.ADD;
-  item: CartItem;
+  item: TCartItem;
 }
-type CartReducerRemoveAction = {
-  type: Action_Type.REMOVE;
+type TCartReducerRemoveAction = {
+  type: Action_Type.SUBTRACT | Action_Type.REMOVE;
   id: string;
 }
-type CartReducerRetrieveAction = {
+type TCartReducerRetrieveAction = {
   type: Action_Type.RETRIEVE;
-  cartState: CartState;
+  cartState: TCartState;
 }
-type CartReducerClearAction = {
+type TCartReducerClearAction = {
   type: Action_Type.CLEAR;
 }
 
-export type CartReducerAction = CartReducerAddAction | CartReducerRemoveAction | CartReducerRetrieveAction | CartReducerClearAction;
+export type TCartReducerAction = TCartReducerAddAction | TCartReducerRemoveAction | TCartReducerRetrieveAction | TCartReducerClearAction;
+
+export type TCartContext = {
+  cartItems: TCartItem[];
+  totalItems: number;
+  totalPrice: number;
+  onAddItem: (item: TCartItem) => void;
+  onSubtractItem: (id: string) => void;
+  onRemoveItem: (id: string) => void;
+  clearCart: () => void;
+  isInCart: (id: string) => boolean;
+}
 
 export enum Action_Type {
   ADD,
+  SUBTRACT,
   REMOVE,
   CLEAR,
   RETRIEVE

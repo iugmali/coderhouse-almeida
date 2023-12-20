@@ -1,4 +1,4 @@
-import ItemDetailContainer from "@/components/screens/ItemDetailContainer";
+import ItemDetailScreen from "@/screens/ItemDetail";
 
 type Props = {
   params: {
@@ -8,7 +8,7 @@ type Props = {
 
 const ItemPage = async ({params: {id}} : Props) => {
   return (
-    <ItemDetailContainer id={id} />
+    <ItemDetailScreen id={id} />
   );
 };
 
