@@ -8,7 +8,7 @@ import {
 import {useFormState, useFormStatus} from "react-dom";
 import Spinner from "@/components/ui/Spinner";
 import Button from "@/components/ui/Button";
-import {montserrat} from "@/app/fonts";
+import {jetBrainsMono, montserrat} from "@/app/fonts";
 
 
 export default function LoginForm({login}: any) { // o type precisa ser any enquanto nao resolvem o bug das server actions com firebase-admin, que só podem ser passados por props não tipadas
@@ -21,14 +21,14 @@ export default function LoginForm({login}: any) { // o type precisa ser any enqu
         <div className="w-full">
           <div>
             <label
-              // className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              className={`${montserrat.className} text-sm md:text-base`}
               htmlFor="email"
             >
               Email
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="email"
                 type="email"
                 name="email"
@@ -42,14 +42,14 @@ export default function LoginForm({login}: any) { // o type precisa ser any enqu
           </div>
           <div className="mt-4">
             <label
-              // className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              className={`${montserrat.className} text-sm md:text-base`}
               htmlFor="password"
             >
               Senha
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="password"
                 type="password"
                 name="password"

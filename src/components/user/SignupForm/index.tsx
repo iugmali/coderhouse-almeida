@@ -63,7 +63,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`name`}>Seu Nome</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="name"
                 type="text"
                 name="name"
@@ -88,7 +88,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`email`}>Seu E-mail</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="email"
                 type="email"
                 name="email"
@@ -113,7 +113,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`phone`}>Telefone</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="phone"
                 type="text"
                 name="phone"
@@ -139,7 +139,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`cep`}>CEP</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="cep"
                 type="text"
                 name="cep"
@@ -166,7 +166,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`endereco`}>Endereço</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="endereco"
                 type="text"
                 name="endereco"
@@ -181,7 +181,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`number`}>Número</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="number"
                 type="text"
                 name="number"
@@ -208,7 +208,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
                    htmlFor={`complement`}>Complemento</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="complement"
                 type="text"
                 name="complement"
@@ -223,7 +223,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`city`}>Cidade</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="city"
                 type="text"
                 name="city"
@@ -238,7 +238,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
               senha</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="password"
                 type="password"
                 name="password"
@@ -252,11 +252,10 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
             </div>
           </div>
           <div className={`w-full`}>
-            <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`confirmPassword`}>Confirme sua
-              senha</label>
+            <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`confirmPassword`}>Confirme sua senha</label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
                 id="confirmPassword"
                 type="password"
                 minLength={6}
