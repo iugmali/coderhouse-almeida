@@ -43,7 +43,7 @@ const Navbar = ({logout, session}:Props) => {
             </li>
           </ul>
           <div className={`flex justify-end`}>
-            <button className={`group p-3 mx-2 md:hidden`}>
+            <button className={`group p-3 mx-2 md:hidden`} tabIndex={0}>
               <div className={`transition-all space-y-2 group-focus-within:space-y-0 group-focus-within:space-x-3`}>
                 <span className={`block w-6 h-0.5 bg-gray-300 transition-all group-focus-within:rotate-[60deg]`}></span>
                 <span
