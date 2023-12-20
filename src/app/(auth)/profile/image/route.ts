@@ -5,7 +5,7 @@ import {fetchUser, fetchUserImageURLFromStorage} from "@/lib/firebase/data/users
 export const GET = auth(async function GET(req) {
   if (req.auth?.user) {
     const user = await fetchUser(req.auth.user.email as string);
-    if (user) {
+    if (user && user.image) {
       try {
         const imageUrl = await fetchUserImageURLFromStorage(user.id, user.image);
         const response = await fetch(imageUrl);
