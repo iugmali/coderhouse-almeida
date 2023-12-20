@@ -1,4 +1,4 @@
-import {Inter, JetBrains_Mono, Montserrat} from "next/font/google";
+import {Andika, Inter, JetBrains_Mono, Montserrat} from "next/font/google";
 
 export const inter = Inter({ subsets: ['latin'] })
 export const jetBrainsMono = JetBrains_Mono({
@@ -7,4 +7,9 @@ export const jetBrainsMono = JetBrains_Mono({
 })
 export const montserrat = Montserrat({
   subsets: ['latin']
+})
+
+export const andika = Andika({
+  subsets: ['latin'],
+  weight: ['400', '700']
 })

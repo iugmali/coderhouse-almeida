@@ -18,6 +18,7 @@ const Error = ({error, reset}: Props) => {
     <div className={`mt-4 flex flex-col items-center`}>
       <h2 className={`text-center`}>Ops... Deu ruim!</h2>
       <Button
+        className={`mt-2`}
         handleClick={() => reset()}
       >
         Recarregue
