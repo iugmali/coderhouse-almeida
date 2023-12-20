@@ -1,16 +1,17 @@
-import { motion } from "framer-motion";
-import React from "react";
-import {twMerge} from "tailwind-merge";
+'use client'
 
-type Props = {
-  children?: React.ReactNode;
-  disabled?: boolean;
+import {HTMLMotionProps, motion} from "framer-motion";
+import {ReactNode} from "react";
+import {twMerge} from "tailwind-merge";
+import Link from "next/link";
+
+type ButtonProps = HTMLMotionProps<"button"> & {
+  children: ReactNode;
   className?: string;
-  title?: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 };
 
-const Button = ({children, handleClick, disabled = false, className = '', title}: Props) => {
+const Button = ({children, handleClick, disabled = false, className = '', ...rest}: ButtonProps) => {
   return (
     <motion.button
       initial={{
@@ -29,18 +30,20 @@ const Button = ({children, handleClick, disabled = false, className = '', title}
       }}
       whileHover={{
         scale: disabled ? 1 : 1.05,
+        transition: {
+          type: disabled ? 'tween' : 'spring'
+        }
       }}
-      title={title}
+      {...rest}
       className={twMerge(`rounded bg-blue-900 disabled:bg-gray-500 px-4 py-2 text-white hover:opacity-90 active:opacity-70 disabled:hover:opacity-100`, className)}
       onClick={handleClick}
-      disabled={disabled}
     >
       {children}
     </motion.button>
   );
 }
 
-export const TextButton = ({children, handleClick, disabled = false, className = '', title}: Props) => {
+export const TextButton = ({children, handleClick, disabled = false, className = '', ...rest}: ButtonProps) => {
   return (
     <motion.button
       initial={{
@@ -57,11 +60,21 @@ export const TextButton = ({children, handleClick, disabled = false, className =
       whileTap={{
         scale: disabled ? 1 : 0.95
       }}
-      title={title}
+      {...rest}
       className={twMerge(`rounded bg-gray-50 disabled:bg-gray-500 px-4 py-2 text-gray-950 disabled:hover:opacity-100`, className)} onClick={handleClick} disabled={disabled}>
       {children}
     </motion.button>
   );
+}
+
+type LinkButtonProps = {
+  children: ReactNode
+  href: string
+  className: string
+}
+
+export const LinkButton = ({children, href, className = ''}: LinkButtonProps) => {
+  return <Link className={twMerge(`border border-gray-950 py-2 px-4 rounded-3xl text-center`, className)} href={href} scroll={false}>{children}</Link>
 }
 
 export default Button;

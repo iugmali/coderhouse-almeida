@@ -24,7 +24,7 @@ const Modal = ({onClose, children}: Props) => {
             opacity: 0,
             transition: {duration: 0.3}
           }}
-          className={`fixed top-0 z-[60] h-screen w-screen bg-gray-950`} onClick={() => onClose()}/>
+          className={`fixed top-0 left-0 z-[60] h-screen w-screen bg-gray-950`} onClick={() => onClose()}/>
         <motion.div
           key={'modal'}
           initial={{
