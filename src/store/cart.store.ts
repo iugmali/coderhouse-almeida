@@ -73,7 +73,8 @@ export const useCartStore = create<TCartContext>()(
       }
     }),
     {
-      name: 'coderstore-almeida-cart-storage-aula13',
+      name: 'coderstore-almeida-cart-storage',
+      skipHydration: true
     },
   ),
 )
