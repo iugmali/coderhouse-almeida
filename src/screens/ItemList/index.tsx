@@ -21,11 +21,11 @@ const ItemListScreen = async ({category}: Props) => {
     <main className={`flex flex-col mt-4 mb-4`}>
       {products.length > 0 ? (
         <>
-          <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Listando {category ?? 'todos os produtos'}.</h1>
+          <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Listando {category ?? 'todos os itens'}.</h1>
           <ItemList items={products}/>
         </>
       ) : (
-        <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Não temos {category ?? 'produtos'}.</h1>
+        <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Não temos {category ?? 'itens'}.</h1>
       )}
     </main>
   );
