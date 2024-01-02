@@ -3,7 +3,7 @@ import {TOrder} from "@/types/order";
 import {jetBrainsMono} from "@/app/fonts";
 import {formatCurrency} from "@/lib/util";
 
-const OrderItem = (order: TOrder) => {
+const Order = (order: TOrder) => {
   return (
     <article className={`flex flex-col md:flex-row justify-between items-center mx-4 py-2 px-4 gap-4 border rounded-2xl border-gray-950`}>
       <p>ID do pedido: <span className={`${jetBrainsMono.className} font-bold`}>{order.id}</span></p>
@@ -15,4 +15,4 @@ const OrderItem = (order: TOrder) => {
   );
 }
 
-export default memo(OrderItem);
+export default memo(Order);

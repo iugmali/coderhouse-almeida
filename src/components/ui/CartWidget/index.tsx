@@ -5,8 +5,6 @@ import {ShoppingCartIcon} from "@heroicons/react/24/outline";
 import {useCartStore} from "@/store/cart.store";
 import {useEffect, useState} from "react";
 
-
-
 const CartWidget = () => {
   const totalItems = useCartStore(state => state.totalItems);
 
@@ -39,14 +37,13 @@ const CartWidget = () => {
           >
             <motion.p
               className="flex h-2 w-2 items-center justify-center rounded-full bg-gray-100 p-3 text-xs text-gray-950"
-              suppressHydrationWarning={true}
             >
               {totalItems}
             </motion.p>
           </motion.div>
           :
           <div>
-            <p suppressHydrationWarning={true}></p>
+            <p></p>
           </div>
         }
         <ShoppingCartIcon key={`shopping-cart-icon`} className={`mt-0 h-6 w-6`}/>

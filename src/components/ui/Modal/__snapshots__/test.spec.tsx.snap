@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal renders unchanged 1`] = `
+<div
+  class="fixed top-0 left-0 z-[60] h-screen w-screen bg-gray-950"
+  style="opacity: 1;"
+/>
+`;
