@@ -35,16 +35,16 @@ npm run seed
 
 ## Rodando a aplicação
 
-Rodando o servidor de desenvolvimento:
+Rodando o servidor de desenvolvimento (disponível em http://localhost:3000):
 ```bash
 npm run dev
 ```
-Rodando o servidor em produção:
+Rodando o servidor em produção (disponível em http://localhost:3000):
 ```bash
 npm run build
 npm start
 ```
-Rodando a aplicação em docker
+Rodando a aplicação em docker (disponível em http://localhost:3344)
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
