@@ -1,12 +1,15 @@
 version: '3'
 
 services:
+
   coderstore-almeida:
     build:
       context: .
     container_name: coderstore-almeida
+    restart: always
     networks:
       - nginx-proxy-manager_default
+
 networks:
   nginx-proxy-manager_default:
     external: true
