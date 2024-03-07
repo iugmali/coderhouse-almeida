@@ -7,7 +7,6 @@ import {AnimatePresence, motion} from "framer-motion";
 import Modal from "@/components/ui/Modal";
 import CartList from "@/components/cart/CartList";
 import {useCartStore} from "@/store/cart.store";
-import Link from "next/link";
 
 const CartPage = () => {
 
@@ -88,7 +87,7 @@ const CartPage = () => {
             <Button className={`bg-green-800`} handleClick={() => router.push('/cart/checkout')}>Prosseguir para Checkout</Button>
           </>
         ) : (
-          <Link className={``} href={`/`}><TextButton className={`rounded-3xl border border-gray-950`}>Retornar para a tela inicial</TextButton></Link>
+          <LinkButton className={``} href={`/`}>Retornar para a tela inicial</LinkButton>
         )}
       </motion.div>
     </main>
