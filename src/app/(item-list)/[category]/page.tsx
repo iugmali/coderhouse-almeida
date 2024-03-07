@@ -1,4 +1,3 @@
-import ItemListScreen from "@/screens/ItemList";
 import {fetchCategories, fetchCategory, fetchItems} from "@/lib/firebase/data/items";
 import {auth} from "@/lib/auth";
 import {TItem} from "@/types/item";
