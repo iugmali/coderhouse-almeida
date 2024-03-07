@@ -8,6 +8,7 @@ import {TLoginFormState, TSignUpFormState} from "@/types/auth";
 import bcrypt from "bcrypt";
 import {createUser, fetchUser} from "@/lib/firebase/data/users";
 import {SignUpFormSchema} from "@/lib/zod/schemas";
+import {delay} from "@/lib/util";
 
 export const logout = async () => {
   await signOut();
@@ -65,7 +66,7 @@ export const signUp = async (prevState: TSignUpFormState, formData: FormData) =>
   }
   try {
     await createUser(user);
-    await new Promise((resolve, reject) => setTimeout(() => resolve(true), 2000))
+    await delay(2000);
     const newFormData = new FormData();
     newFormData.append("email", email);
     newFormData.append("password", password);
@@ -85,5 +86,4 @@ export const signUp = async (prevState: TSignUpFormState, formData: FormData) =>
     }
   }
   redirect('/cart/checkout');
-
 }
