@@ -36,4 +36,10 @@ yarn-error.log*
 next-env.d.ts
 
 /.idea
+/.swc
+
 .env
+
+# stryker temp files
+.stryker-tmp
+/reports

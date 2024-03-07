@@ -68,3 +68,7 @@ export const fetchCep = async (cep: string): Promise<TCepData> => {
     }
   }
 }
+
+export const delay = async (ms: number)=> {
+  await new Promise((res, rej) => setTimeout(() => res(true), 3000));
+}
