@@ -74,7 +74,7 @@ type LinkButtonProps = {
 }
 
 export const LinkButton = ({children, href, className = ''}: LinkButtonProps) => {
-  return <Link className={twMerge(`border border-gray-950 py-2 px-4 rounded-3xl text-center`, className)} href={href} scroll={false}>{children}</Link>
+  return <Link scroll={false} href={href}><TextButton className={twMerge(`rounded-3xl border border-gray-950`, className)}>{children}</TextButton></Link>
 }
 
 export default Button;

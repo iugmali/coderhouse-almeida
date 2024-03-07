@@ -10,27 +10,7 @@ exports[`Button default Button renders unchanged 1`] = `
 </button>
 `;
 
-exports[`Button default Button should render properly 1`] = `
-<button
-  class="rounded bg-blue-900 disabled:bg-gray-500 px-4 py-2 text-white hover:opacity-90 active:opacity-70 disabled:hover:opacity-100"
-  style="opacity: 0; transform: scale(0) translateZ(0);"
-  tabindex="0"
->
-  button
-</button>
-`;
-
 exports[`Button text Button renders unchanged 1`] = `
-<button
-  class="rounded bg-gray-50 disabled:bg-gray-500 px-4 py-2 text-gray-950 disabled:hover:opacity-100"
-  style="opacity: 0; transform: scale(0) translateZ(0);"
-  tabindex="0"
->
-  button
-</button>
-`;
-
-exports[`Button text Button should render properly 1`] = `
 <button
   class="rounded bg-gray-50 disabled:bg-gray-500 px-4 py-2 text-gray-950 disabled:hover:opacity-100"
   style="opacity: 0; transform: scale(0) translateZ(0);"

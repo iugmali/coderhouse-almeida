@@ -57,9 +57,9 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
   ) : (
       <form action={dispatch} className={`flex flex-col items-center w-full`}>
         <div className="flex-1 px-6 pb-4 w-full md:w-1/2">
-          <h1 className={`${jetBrainsMono.className} text-center text-sm md:text-base`}>Precisamos de alguns dados para
+          <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Precisamos de alguns dados para
             proceder...</h1>
-          <div className={`w-full`}>
+          <div className={`w-full mt-4`}>
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`name`}>Seu Nome</label>
             <div className="relative">
               <input
