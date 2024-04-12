@@ -16,4 +16,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.PRIVATE_KEY }}
-          script: 'cd /app/codertore && . ./deploy.sh'
+          script: 'cd /app/coderstore && . ./deploy.sh'
