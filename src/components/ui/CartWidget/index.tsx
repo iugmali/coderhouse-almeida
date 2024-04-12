@@ -4,17 +4,10 @@ import {motion, AnimatePresence} from "framer-motion";
 import {ShoppingCartIcon} from "@heroicons/react/24/outline";
 import {useCartStore} from "@/store/cart.store";
 import {useEffect, useState} from "react";
+import {useCartStoreHydrate} from "@/store/useCartStoreHydrate";
 
 const CartWidget = () => {
   const totalItems = useCartStore(state => state.totalItems);
-
-  // Esse código precisa ser passado para clients components que utilizam zustand com persist, para garantir que o zustand rode depois do nextjs hidratar
-  const [hasHydrated, setHasHydrated] = useState(false);
-  useEffect(() => {
-    useCartStore.persist.rehydrate();
-    setHasHydrated(true);
-  }, []);
-  if (!hasHydrated) return null;
 
   return (
     <button className="relative hover:opacity-50">

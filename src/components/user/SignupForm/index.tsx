@@ -11,6 +11,7 @@ import Spinner from "@/components/ui/Spinner";
 import {jetBrainsMono, montserrat} from "@/app/fonts";
 import {useCartStore} from "@/store/cart.store";
 import {TSignUpFormState} from "@/types/auth";
+import {useCartStoreHydrate} from "@/store/useCartStoreHydrate";
 
 const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao resolvem o bug das server actions com firebase-admin, que só podem ser passados por props não tipadas
 
@@ -41,13 +42,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
     onMount().catch(e => console.error(e));
   }, [debouncedCep]);
 
-  // Esse código precisa ser passado para clients components que utilizam zustand com persist, para garantir que o zustand rode depois do nextjs hidratar
-  const [hasHydrated, setHasHydrated] = useState(false);
-  useEffect(() => {
-    useCartStore.persist.rehydrate();
-    setHasHydrated(true);
-  }, []);
-  if (!hasHydrated) return null;
+  if (!useCartStoreHydrate()) return null;
 
   return (totalItems === 0) ? (
     <div className={`flex flex-col gap-4 justify-center items-center`}>
