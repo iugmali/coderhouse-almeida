@@ -9,6 +9,8 @@ import {UserIcon as UserIconSolid} from "@heroicons/react/24/solid";
 import {useFormStatus} from "react-dom";
 import Spinner from "@/components/ui/Spinner";
 import {Session} from "next-auth";
+import MenuButton from "@/components/ui/MenuButton";
+import {useCartStoreHydrate} from "@/store/useCartStoreHydrate";
 
 type Props = {
   logout: () => Promise<void>
@@ -43,65 +45,44 @@ const Navbar = ({logout, session}:Props) => {
             </li>
           </ul>
           <div className={`flex justify-end`}>
-            <button className={`group p-3 mx-2 md:hidden`} tabIndex={0}>
-              <div className={`transition-all space-y-2 group-focus-within:space-y-0 group-focus-within:space-x-3`}>
-                <span className={`block w-6 h-0.5 bg-gray-300 transition-all group-focus-within:rotate-[60deg]`}></span>
-                <span
-                  className={`block w-6 h-0.5 bg-gray-300 transition-all group-focus-within:translate-x-100 group-focus-within:hidden`}></span>
-                <span
-                  className={`block w-6 h-0.5 bg-gray-300 transition-all group-focus-within:-rotate-[60deg] group-focus-within:-translate-y-0.5`}></span>
-              </div>
-              <div
-                className={`z-50 hidden group-focus-within:block md:group-focus-within:hidden absolute right-[74px] top-[100px] w-40 px-8 py-4 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg text-gray-50 rounded-2xl`}>
-                <ul className={`flex flex-col items-center gap-8`}>
-                  <li
-                    className={`${(category === 'linguagens') ? 'text-blue-400' : ''} hover:opacity-50 active:text-blue-400`}>
-                    <Link href={'/linguagens'} scroll={false}>Linguagens</Link>
-                  </li>
-                  <li
-                    className={`${(category === 'bibliotecas') ? 'text-blue-400' : ''} hover:opacity-50 active:text-blue-400`}>
-                    <Link href={'/bibliotecas'} scroll={false}>Bibliotecas</Link>
-                  </li>
-                  <li
-                    className={`${(category === 'frameworks') ? 'text-blue-400' : ''} hover:opacity-50 active:text-blue-400`}>
-                    <Link href={'/frameworks'} scroll={false}>Frameworks</Link>
-                  </li>
-                </ul>
-              </div>
-            </button>
-            <div className={`group p-3 mx-1 relative hover:cursor-pointer`} tabIndex={0}>
-              {(session && session.user) ? (
-                <UserIconSolid className={`absolute w-6 h-6 top-4 left-0 hover:opacity-50`}/>
-              ) : (
-                <UserIconOutLine className={`absolute w-6 h-6 top-4 left-0 hover:opacity-50`}/>
-              )}
-              <div
-                className={`z-50 hidden group-focus-within:block absolute -right-[68px] top-[76px] w-40 px-8 py-4 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg text-gray-50 rounded-2xl`}>
-                <ul className={`flex flex-col items-center gap-8`}>
+            { useCartStoreHydrate() &&
+              <>
+                <MenuButton category={category} />
+                <div className={`group p-3 mx-1 relative hover:cursor-pointer`} tabIndex={0}>
                   {(session && session.user) ? (
-                      <>
+                    <UserIconSolid className={`absolute w-6 h-6 top-4 left-0 hover:opacity-50`}/>
+                  ) : (
+                    <UserIconOutLine className={`absolute w-6 h-6 top-4 left-0 hover:opacity-50`}/>
+                  )}
+                  <div
+                    className={`z-50 hidden group-focus-within:block absolute -right-[68px] top-[76px] w-40 px-8 py-4 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg text-gray-50 rounded-2xl`}>
+                    <ul className={`flex flex-col items-center gap-8`}>
+                      {(session && session.user) ? (
+                          <>
+                            <li
+                              className={`hover:opacity-50 active:text-blue-400`}>
+                              <Link href={'/profile'} scroll={false}>Meu perfil</Link>
+                            </li>
+                            <li
+                              className={`hover:opacity-50 active:text-blue-400`}>
+                              <form action={logout}>
+                                <LogoutButton />
+                              </form>
+                            </li>
+                          </>
+                        )
+                        :
                         <li
                           className={`hover:opacity-50 active:text-blue-400`}>
-                          <Link href={'/profile'} scroll={false}>Meu perfil</Link>
+                          <Link href={'/login'} scroll={false}>Entrar</Link>
                         </li>
-                        <li
-                          className={`hover:opacity-50 active:text-blue-400`}>
-                          <form action={logout}>
-                            <LogoutButton />
-                          </form>
-                        </li>
-                      </>
-                    )
-                    :
-                    <li
-                      className={`hover:opacity-50 active:text-blue-400`}>
-                      <Link href={'/login'} scroll={false}>Entrar</Link>
-                    </li>
-                  }
-                </ul>
-              </div>
-            </div>
-            <Link className={`mt-1 p-3`} href={`/cart`} scroll={false}><CartWidget /></Link>
+                      }
+                    </ul>
+                  </div>
+                </div>
+                <Link className={`mt-1 p-3`} href={`/cart`} scroll={false}><CartWidget /></Link>
+              </>
+            }
           </div>
         </div>
       </nav>

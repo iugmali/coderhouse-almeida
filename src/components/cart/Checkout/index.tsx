@@ -10,6 +10,7 @@ import Spinner from "@/components/ui/Spinner";
 import {AnimatePresence} from "framer-motion";
 import Modal from "@/components/ui/Modal";
 import {useRouter} from "next/navigation";
+import {useCartStoreHydrate} from "@/store/useCartStoreHydrate";
 
 const Checkout = ({user, placeOrder}: any) => { // precisa ser any enquanto nao resolvem o bug das server actions com firebase-admin, que só podem ser passados por props não tipadas
   const router = useRouter();
@@ -25,13 +26,7 @@ const Checkout = ({user, placeOrder}: any) => { // precisa ser any enquanto nao 
     router.push('/profile')
   }
 
-  // Esse código precisa ser passado para clients components que utilizam zustand com persist, para garantir que o zustand rode depois do nextjs hidratar
-  const [hasHydrated, setHasHydrated] = useState(false);
-  useEffect(() => {
-    useCartStore.persist.rehydrate();
-    setHasHydrated(true);
-  }, []);
-  if (!hasHydrated) return null;
+  if (!useCartStoreHydrate()) return null;
 
   return (
       (cartItems.length > 0) ? (

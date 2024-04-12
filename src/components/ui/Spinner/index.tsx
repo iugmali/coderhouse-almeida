@@ -6,4 +6,12 @@ const Spinner = ({className}: {className?: string}) => {
   )
 }
 
+export const LoadingScreen = () => {
+  return (
+    <div className={`fixed z-40 h-full w-full bg-gray-950 opacity-50 top-0 left-0 grid place-content-center`}>
+      <Spinner />
+    </div>
+  );
+}
+
 export default Spinner;

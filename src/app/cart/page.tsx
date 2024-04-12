@@ -7,6 +7,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import Modal from "@/components/ui/Modal";
 import CartList from "@/components/cart/CartList";
 import {useCartStore} from "@/store/cart.store";
+import {useCartStoreHydrate} from "@/store/useCartStoreHydrate";
 
 const CartPage = () => {
 
@@ -21,13 +22,7 @@ const CartPage = () => {
     clearCart();
   }
 
-  // Esse código precisa ser passado para clients components que utilizam zustand com persist, para garantir que o zustand rode depois do nextjs hidratar
-  const [hasHydrated, setHasHydrated] = useState(false);
-  useEffect(() => {
-    useCartStore.persist.rehydrate();
-    setHasHydrated(true);
-  }, []);
-  if (!hasHydrated) return null;
+  if (!useCartStoreHydrate()) return null;
 
   return (
     <main className={`flex flex-col mt-4`} suppressHydrationWarning={true}>
