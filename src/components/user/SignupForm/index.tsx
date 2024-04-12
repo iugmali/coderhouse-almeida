@@ -30,6 +30,9 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
   const [phoneNumber, setPhoneNumber] = useState('');
   const [cepData, setCepData] = useState<TCepData>(cepDataInitialState)
 
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+
   const totalItems = useCartStore(state => state.totalItems);
 
   useEffect(() => {
@@ -41,6 +44,11 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
     }
     onMount().catch(e => console.error(e));
   }, [debouncedCep]);
+
+  useEffect(() => {
+    setStreet(`${cepData.logradouro} - ${cepData.complemento}`.trim());
+    setCity(`${cepData.bairro} - ${cepData.localidade}/${cepData.uf}`.trim());
+  }, [cepData]);
 
   if (!useCartStoreHydrate()) return null;
 
@@ -160,14 +168,11 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
           <div className={`w-full`}>
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`endereco`}>Endereço</label>
             <div className="relative">
-              <input
+              <div
                 className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
-                id="endereco"
-                type="text"
-                name="endereco"
-                value={`${cepData.logradouro} - ${cepData.complemento}`}
-                required
-              />
+              >
+              {street}
+              </div>
               <MapPinIcon
                 className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
             </div>
@@ -217,13 +222,11 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
           <div className={`w-full`}>
             <label className={`${montserrat.className} text-sm md:text-base`} htmlFor={`city`}>Cidade</label>
             <div className="relative">
-              <input
+              <div
                 className={`${jetBrainsMono.className} peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500`}
-                id="city"
-                type="text"
-                name="city"
-                value={`${cepData.bairro} - ${cepData.localidade}/${cepData.uf}`}
-              />
+              >
+                {city}
+              </div>
               <MapPinIcon
                 className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
             </div>
