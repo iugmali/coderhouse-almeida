@@ -4,7 +4,7 @@ export type TCategory = {
   name: string;
 }
 
-export type TItem = {
+export type TProduct = {
   id: string;
   categoryId: string;
   title: string;

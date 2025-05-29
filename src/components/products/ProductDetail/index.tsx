@@ -1,16 +1,16 @@
 'use client';
 
-import {TItem} from "@/types/item";
+import {TProduct} from "@/types/product";
 import Image, {ImageLoaderProps} from "next/image";
 import Button, {TextButton} from "@/components/ui/Button";
 import {useEffect, useState} from "react";
-import ItemCount from "@/components/items/ItemCount";
+import ItemCount from "src/components/ui/ItemCount";
 import {useRouter} from "next/navigation";
 import {formatCurrency} from "@/lib/util";
 import {andika, jetBrainsMono, montserrat} from "@/app/fonts";
 import {useCartStore} from "@/store/cart.store";
 
-const ItemDetail = ({id, categoryId, title, description, images, stock, price}: TItem) => {
+const ProductDetail = ({id, categoryId, title, description, images, stock, price}: TProduct) => {
   const router = useRouter();
 
   const onAddItem = useCartStore(state => state.onAddItem);
@@ -78,4 +78,4 @@ const ItemDetail = ({id, categoryId, title, description, images, stock, price}: 
   );
 };
 
-export default ItemDetail;
+export default ProductDetail;
