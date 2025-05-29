@@ -32,12 +32,12 @@ const Navbar = ({logout, session}:Props) => {
           </div>
           <ul className={`hidden p-3 md:flex md:flex-row gap-8`}>
             <li
-              className={`${jetBrainsMono.className} ${(category === 'linguagens') ? 'text-blue-400' : ''} flex-1 font-medium text-sm hover:opacity-50 active:text-blue-400`}>
-              <Link href={'/linguagens'} scroll={false}>Linguagens</Link>
+              className={`${jetBrainsMono.className} ${(category === 'languages') ? 'text-blue-400' : ''} flex-1 font-medium text-sm hover:opacity-50 active:text-blue-400`}>
+              <Link href={'/languages'} scroll={false}>Linguagens</Link>
             </li>
             <li
-              className={`${jetBrainsMono.className} ${(category === 'bibliotecas') ? 'text-blue-400' : ''} flex-1 font-medium text-sm hover:opacity-50 active:text-blue-400`}>
-              <Link href={'/bibliotecas'} scroll={false}>Bibliotecas</Link>
+              className={`${jetBrainsMono.className} ${(category === 'libraries') ? 'text-blue-400' : ''} flex-1 font-medium text-sm hover:opacity-50 active:text-blue-400`}>
+              <Link href={'/libraries'} scroll={false}>Bibliotecas</Link>
             </li>
             <li
               className={`${jetBrainsMono.className} ${(category === 'frameworks') ? 'text-blue-400' : ''} flex-1 font-medium text-sm hover:opacity-50 active:text-blue-400`}>

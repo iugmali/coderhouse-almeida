@@ -1,5 +1,4 @@
 import Link from "next/link";
-import {useCartStoreHydrate} from "@/store/useCartStoreHydrate";
 
 type Props = {
   category: string|string[];
@@ -19,12 +18,12 @@ const MenuButton = ({category}: Props) => {
         className={`z-50 hidden group-focus-within:block md:group-focus-within:hidden absolute right-[74px] top-[100px] w-40 px-8 py-4 bg-gradient-to-b from-gray-900 to-gray-800 shadow-lg text-gray-50 rounded-2xl`}>
         <ul className={`flex flex-col items-center gap-8`}>
           <li
-            className={`${(category === 'linguagens') ? 'text-blue-400' : ''} hover:opacity-50 active:text-blue-400`}>
-            <Link href={'/linguagens'} scroll={false}>Linguagens</Link>
+            className={`${(category === 'languages') ? 'text-blue-400' : ''} hover:opacity-50 active:text-blue-400`}>
+            <Link href={'/languages'} scroll={false}>Linguagens</Link>
           </li>
           <li
-            className={`${(category === 'bibliotecas') ? 'text-blue-400' : ''} hover:opacity-50 active:text-blue-400`}>
-            <Link href={'/bibliotecas'} scroll={false}>Bibliotecas</Link>
+            className={`${(category === 'libraries') ? 'text-blue-400' : ''} hover:opacity-50 active:text-blue-400`}>
+            <Link href={'/libraries'} scroll={false}>Bibliotecas</Link>
           </li>
           <li
             className={`${(category === 'frameworks') ? 'text-blue-400' : ''} hover:opacity-50 active:text-blue-400`}>

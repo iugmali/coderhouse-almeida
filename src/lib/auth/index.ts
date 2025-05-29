@@ -1,6 +1,5 @@
 import Credentials from "@auth/core/providers/credentials";
 import bcrypt from 'bcrypt';
-import {z} from "zod";
 import NextAuth from "next-auth"
 import {authConfig} from "@/lib/auth/config";
 import {fetchUser} from "@/lib/firebase/data/users";

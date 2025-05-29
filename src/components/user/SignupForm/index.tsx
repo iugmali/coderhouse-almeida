@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 import {TCepData} from "@/types/user";
-import {fetchCep, inputMaskCep, inputMaskPhone, maskAddressNumber} from "@/lib/util";
+import {fetchCep, inputMaskCep, inputMaskPhone, inputMaskAddressNumber} from "@/lib/util";
 import {useDebounce} from "use-debounce";
 import Button, {LinkButton} from "@/components/ui/Button";
 import {AtSymbolIcon, KeyIcon, MapPinIcon, PhoneIcon, UserIcon} from "@heroicons/react/24/outline";
@@ -186,7 +186,7 @@ const SignupForm = ({signUp}: any) => { // o type precisa ser any enquanto nao r
                 type="text"
                 name="number"
                 placeholder="Seu Número"
-                onChange={e => e.target.value = maskAddressNumber(e.target.value)}
+                onChange={e => e.target.value = inputMaskAddressNumber(e.target.value)}
                 autoComplete={`address-line1`}
                 aria-describedby={`number-error`}
                 required
