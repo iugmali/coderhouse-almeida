@@ -4,7 +4,7 @@ import {TOrder} from "@/types/order";
 import {fetchUser} from "@/lib/firebase/data/users";
 import {TCartItem} from "@/types/cart";
 import {db} from "@/lib/firebase/config";
-import {TItem} from "@/types/item";
+import {TProduct} from "@/types/product";
 import {firestoreAutoId} from "@/lib/util";
 import {unstable_noStore as noStore} from "next/dist/server/web/spec-extension/unstable-no-store";
 
@@ -16,7 +16,7 @@ export const createOrder = async (email: string, cartItems: TCartItem[], total: 
       await db.runTransaction(async (t) => {
         const itemRef = db.collection('items').doc(cartItem.id);
         const doc = await t.get(itemRef);
-        const newStock = (doc.data() as TItem).stock - cartItem.quantity;
+        const newStock = (doc.data() as TProduct).stock - cartItem.quantity;
         t.update(itemRef, {stock: newStock});
       });
     }

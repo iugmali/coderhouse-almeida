@@ -1,7 +1,7 @@
-import {TItem} from "@/types/item";
-import {fetchItem} from "@/lib/firebase/data/items";
+import {TProduct} from "@/types/product";
+import {fetchProduct} from "@/lib/firebase/data/products";
 import {notFound} from "next/navigation";
-import ItemDetail from "@/components/items/ItemDetail";
+import ProductDetail from "src/components/products/ProductDetail";
 
 type Props = {
   params: {
@@ -10,16 +10,16 @@ type Props = {
 };
 
 const ItemPage = async ({params: {id}} : Props) => {
-  let product: TItem|null;
+  let product: TProduct|null;
   try {
-    product = await fetchItem(id);
+    product = await fetchProduct(id);
     if (!product) notFound();
   } catch (e) {
     throw e;
   }
   return (
     <main className={`flex flex-col h-full mt-4 mb-4`}>
-      <ItemDetail {...product} />
+      <ProductDetail {...product} />
     </main>
   );
 };

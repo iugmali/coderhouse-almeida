@@ -1,14 +1,14 @@
 import {auth} from "@/lib/auth";
-import {TItem} from "@/types/item";
-import {fetchItems} from "@/lib/firebase/data/items";
+import {TProduct} from "@/types/product";
+import {fetchProducts} from "@/lib/firebase/data/products";
 import {jetBrainsMono} from "@/app/fonts";
-import ItemList from "@/components/items/ItemList";
+import ItemList from "src/components/products/ProductList";
 
 const ItemListPage = async () => {
   const session = await auth();
-  let products: TItem[] = [];
+  let products: TProduct[] = [];
   try {
-    products = await fetchItems();
+    products = await fetchProducts();
   } catch (e) {
     throw e;
   }
@@ -17,7 +17,7 @@ const ItemListPage = async () => {
       {products.length > 0 ? (
         <>
           <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Listando todos os itens.</h1>
-          <ItemList items={products}/>
+          <ItemList products={products} />
         </>
       ) : (
         <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Não temos itens.</h1>

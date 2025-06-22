@@ -1,8 +1,8 @@
-import {fetchCategories, fetchCategory, fetchItems} from "@/lib/firebase/data/items";
+import {fetchCategories, fetchCategory, fetchProducts} from "@/lib/firebase/data/products";
 import {auth} from "@/lib/auth";
-import {TItem} from "@/types/item";
+import {TProduct} from "@/types/product";
 import {jetBrainsMono} from "@/app/fonts";
-import ItemList from "@/components/items/ItemList";
+import ItemList from "src/components/products/ProductList";
 
 type Props = {
   params: {
@@ -21,9 +21,9 @@ export const generateStaticParams = async () => {
 
 const ItemListByCategoryPage = async ({params: {category: categoryId}} : Props) => {
   const session = await auth();
-  let products: TItem[] = [];
+  let products: TProduct[] = [];
   try {
-    products = await fetchItems(categoryId);
+    products = await fetchProducts(categoryId);
   } catch (e) {
     throw e;
   }
@@ -32,7 +32,7 @@ const ItemListByCategoryPage = async ({params: {category: categoryId}} : Props) 
       {products.length > 0 ? (
         <>
           <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Listando {categoryId}.</h1>
-          <ItemList items={products}/>
+          <ItemList products={products} />
         </>
       ) : (
         <h1 className={`${jetBrainsMono.className} text-center text-gray-600 text-sm md:text-base`}>Olá, {(session && session.user) ? session.user.name : 'visitante'}! Não temos {categoryId}.</h1>

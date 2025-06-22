@@ -4,7 +4,7 @@ import {jetBrainsMono} from "@/app/fonts";
 const shimmer =
   'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
 
-const ItemSkeleton = () => {
+export const ItemSkeleton = () => {
   return (
     <article
       className={`group rounded-3xl justify-self-center w-[288px] h-[350px] text-gray-950 shadow-sm hover:shadow-2xl flex flex-col justify-center items-center relative`}>
@@ -32,6 +32,5 @@ export const ItemListSkeleton = () => {
         <ItemSkeleton/>
       </section>
     </main>
-
   );
 }

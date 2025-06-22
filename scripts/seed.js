@@ -24,7 +24,7 @@ const firebaseCredentials = {
 }
 
 const seedCategories = async (db) => {
-  console.log('Criando categorias...')
+  console.log('Seeding categories...')
   try {
     for (const category of categories) {
       const doc = await db.collection('categories').doc(category.id).get();
@@ -41,14 +41,14 @@ const seedCategories = async (db) => {
   }
 }
 
-const seedItems = async (db) => {
-  console.log('Criando items...')
+const seedProducts = async (db) => {
+  console.log('Seeding products...')
   try {
     for (const item of items) {
-      const doc = await db.collection('items').where("title", "==", item.title).get();
+      const doc = await db.collection('products').where("title", "==", item.title).get();
       if (doc.empty)  {
         const id = firestoreAutoId();
-        await db.collection('items').doc(id).set({
+        await db.collection('products').doc(id).set({
           title: item.title,
           description: item.description,
           price: item.price,
@@ -56,7 +56,7 @@ const seedItems = async (db) => {
           stock: item.stock,
           categoryId: item.categoryId,
         }).then((data) => {
-          console.log(`Criado item ${item.title}.`)
+          console.log(`Created product ${item.title}.`)
         });
         for (const image of item.images) {
           await uploadFile(id, image)
@@ -80,7 +80,7 @@ const uploadFile = async (itemId, itemImage) => {
   await bucket.upload(
     path.join(__dirname, 'data', 'images', itemImage),
     {
-      destination: `images/items/${itemId}/${itemImage}`,
+      destination: `images/products/${itemId}/${itemImage}`,
       metadata: {
         cacheControl: "public, max-age=14400",
         contentType: "image/png"
@@ -96,13 +96,13 @@ const main = async () => {
   }, ADMIN_APP_NAME);
   const db = getFirestore(app);
   await seedCategories(db);
-  await seedItems(db);
-  console.log(`Items e categorias criados. Tudo pronto!`);
+  await seedProducts(db);
+  console.log(`Created products and categories. All set!`);
 }
 
 main().catch((e) => {
   console.error(
-    'Erro enquanto populava os dados: ',
+    'Error while populating data: ',
     e,
   );
 })

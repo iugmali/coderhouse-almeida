@@ -27,7 +27,7 @@ export const inputMaskPhone = (phone: string): string => {
     .replace(/(\d{5}-\d{4})\d+?$/, '$1')
 }
 
-export const maskAddressNumber = (number: string): string => {
+export const inputMaskAddressNumber = (number: string): string => {
   if (/\D+\d$/.test(number)) {
     return number.replace(/^(\D+)(\d+)$/g, '$2')
   }

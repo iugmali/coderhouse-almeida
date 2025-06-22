@@ -1,6 +1,6 @@
 import 'server-only'
 
-import {TCategory, TItem} from "@/types/item";
+import {TCategory, TProduct} from "@/types/product";
 import {db, storage} from "@/lib/firebase/config";
 import {getDownloadURL} from "firebase-admin/storage";
 import {unstable_noStore as noStore} from "next/cache";
@@ -22,29 +22,29 @@ export const fetchCategories = async (): Promise<TCategory[]> => {
   return categories.docs.map(doc => ({...doc.data() as TCategory, id: doc.id}));
 }
 
-export const fetchItem = async (itemId: string): Promise<TItem|null> => {
+export const fetchProduct = async (itemId: string): Promise<TProduct|null> => {
   noStore();
-  const item = await db.collection('items').doc(itemId).get();
+  const item = await db.collection('products').doc(itemId).get();
   if (item.exists) {
-    return {...item.data() as TItem, id: item.id}
+    return {...item.data() as TProduct, id: item.id}
   } else {
     return null;
   }
 }
 
-export const fetchItemImageURLFromStorage = async (itemId: string, imageFile: string) => {
+export const fetchProductImageURLFromStorage = async (itemId: string, imageFile: string) => {
   noStore();
-  return await getDownloadURL(storage.bucket().file(`images/items/${itemId}/${imageFile}`));
+  return await getDownloadURL(storage.bucket().file(`images/products/${itemId}/${imageFile}`));
 }
 
-export const fetchItems = async (categoryId?: string): Promise<TItem[]> => {
+export const fetchProducts = async (categoryId?: string): Promise<TProduct[]> => {
   noStore();
   if (categoryId) {
-    const items = await db.collection('items').where("categoryId", "==", categoryId).get();
+    const items = await db.collection('products').where("categoryId", "==", categoryId).get();
     if (items.empty) return [];
-    return items.docs.map(doc => ({...doc.data() as TItem, id: doc.id}));
+    return items.docs.map(doc => ({...doc.data() as TProduct, id: doc.id}));
   }
-  const items = await db.collection('items').get();
+  const items = await db.collection('products').get();
   if (items.empty) return [];
-  return items.docs.map(doc => ({...doc.data() as TItem, id: doc.id}));
+  return items.docs.map(doc => ({...doc.data() as TProduct, id: doc.id}));
 }

@@ -1,4 +1,4 @@
-import {fetchItemImageURLFromStorage} from "@/lib/firebase/data/items";
+import {fetchProductImageURLFromStorage} from "@/lib/firebase/data/products";
 
 export const dynamic = 'force-dynamic'
 
@@ -11,7 +11,7 @@ type RouteProps = {
 
 export async function GET(request: Request, {params: {id, image}}: RouteProps) {
   try {
-    const imageUrl = await fetchItemImageURLFromStorage(id, image);
+    const imageUrl = await fetchProductImageURLFromStorage(id, image);
     const response = await fetch(imageUrl)
     return new Response(response.body, {headers: response.headers})
   } catch (e) {

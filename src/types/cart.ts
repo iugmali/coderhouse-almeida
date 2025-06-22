@@ -1,6 +1,6 @@
-import {TItem} from "@/types/item";
+import {TProduct} from "@/types/product";
 
-export type TCartItem = TItem & {
+export type TCartItem = TProduct & {
   quantity: number;
 }
 
