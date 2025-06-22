@@ -3,7 +3,7 @@ import './globals.css'
 import React from "react";
 import Navbar from "@/components/Navbar";
 import {inter} from "@/app/fonts";
-import {logout} from "@/lib/actions/auth";
+import {logout} from "@/actions/auth";
 import {auth} from "@/lib/auth";
 
 export const metadata: Metadata = {
